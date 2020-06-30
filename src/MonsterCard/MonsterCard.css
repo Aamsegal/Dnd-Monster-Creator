@@ -1,0 +1,24 @@
+.monsterCard {
+    outline: 1px solid black;
+    background-color: #aaa;
+    height: 400px;
+    margin-bottom: 10%;
+}
+
+@media screen and (max-width: 1000px) {
+    .monsterCard {
+        margin-left: 10%; 
+        margin-right: 10%
+    }
+    
+}
+
+@media screen and (min-width: 1000px) {
+    .monsterCard {
+        display: inline-block;
+        height: 600px;
+        width: 35%;
+        margin: 7.5%;
+    }
+    
+}
