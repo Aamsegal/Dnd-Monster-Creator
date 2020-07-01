@@ -4,29 +4,60 @@ import BaseMonsterStats from './BaseMonsterStats/baseMonsterStats'
 import MonsterCard from './MonsterCard/MonsterCard'
 
 class App extends Component {
-  state = {
-    monsterName: 'Morteh',
-    monsterType: 'God',
-    armorClass: 0,
-    hitPoints: 0,
-    speed: 0,
-    strength: 10,
-    dexterity: 10,
-    constitution: 10,
-    inteligence: 10,
-    wisdom: 10,
-    charisma: 10
+  constructor(props) {
+    super(props)
+      this.state = {
+      mName: '',
+      mType: '',
+      mArmor: 0,
+      mHp: 0,
+      mSpeed: 0,
+      mStr: 10,
+      mDex: 10,
+      mCon: 10,
+      mInt: 10,
+      mWis: 10,
+      mCha: 10
+    }
+  }
+
+  updateMonsterStats = monsterValues => {
+    
+    /*let x
+    for(x in monsterValues) {
+      console.log(x)
+      //const value = monsterValues.x
+      
+      
+      this.setState({x: monsterValues.x})
+      
+    }*/
+  
+    this.setState({mName: monsterValues.mName})
+    this.setState({mType: monsterValues.mType})
+    this.setState({mArmor: monsterValues.mArmor})
+    this.setState({mHp: monsterValues.mHp})
+    this.setState({mSpeed: monsterValues.mSpeed})
+    this.setState({mStr: monsterValues.mStr})
+    this.setState({mDex: monsterValues.mDex})
+    this.setState({mCon: monsterValues.mCon})
+    this.setState({mInt: monsterValues.mInt})
+    this.setState({mWis: monsterValues.mWis})
+    this.setState({mCha: monsterValues.mCha})
+    
   }
 
   render() {
+
+    //const monsterInfo = this.state;
 
     return (
 
       <main className='App'>
   
-        <BaseMonsterStats />
+        <BaseMonsterStats updateMonsterStats={this.updateMonsterStats}/>
 
-        <MonsterCard monsterInfo={this.state}/>
+        <MonsterCard monsterInfo={this.state} />
 
       </main>
     )
