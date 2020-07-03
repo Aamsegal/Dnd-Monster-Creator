@@ -56,8 +56,6 @@ import {v4 as uuidv4 } from 'uuid'
                 this.setState({damagePerRoundSuggestion: combatRatingStats.damagePerRoundSuggestion});
                 this.setState({saveDcSuggestion: combatRatingStats.saveDcSuggestion});
                 this.setState({saveDc: combatRatingStats.saveDc});
-                //console.log(combatRating)
-                //console.log(combatRatingStats)
             }
         }
     }

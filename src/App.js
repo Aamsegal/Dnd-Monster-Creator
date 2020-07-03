@@ -50,19 +50,13 @@ class App extends Component {
   updateMonsterStartingPoint = monsterStartingPoint => {
 
     let averageAc = monsterStartingPoint.armorClassStartingPoint;
-    console.log(averageAc)
     let averageHitpoints = (monsterStartingPoint.hitPointsMin+monsterStartingPoint.hitPointsMax)/2;
-    console.log(averageHitpoints)
     this.setState({mArmor: averageAc})
     this.setState({mHp: averageHitpoints})
 
   }
 
   render() {
-    console.log('Render method call')
-    console.log(this.state)
-
-    //const monsterInfo = this.state;
 
     return (
 
