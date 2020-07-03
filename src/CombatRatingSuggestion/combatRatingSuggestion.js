@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import baseStats from './combatRatingStats';
+import './combatRatingSuggestion.css'
 import {v4 as uuidv4 } from 'uuid'
 
  class CombatRatingSuggestion extends Component {
@@ -18,23 +19,28 @@ import {v4 as uuidv4 } from 'uuid'
             saveDcSuggestion: "",
             saveDc: 0,
     }
-    
 
     generateUuid(){
         const uniqueId = uuidv4();
         return uniqueId;
     }
 
-
-
-    handleSubmit = e => {
-        e.preventDefault()
-        const combatRating = document.getElementById("combatRatingSelection").value;
-        const showKey = document.getElementById("combatRatingSelection").key;
-        let combatRatingStats = {};
-
+    handleSubmit = async (e) => {
+        e.preventDefault()        
         //  compairs the combat rating gathers from the options to see if any
         //match in base stats and saves that object to combatRatingStats
+        //waits for savingUpdatedMonsterInfo to finish then it continues
+        await this.savingUpdatedMonsterInfo();
+
+        this.monsterBaseStatsRender();
+        this.props.updateMonsterStartingPoint(this.state)
+    }
+
+    savingUpdatedMonsterInfo() {
+        const combatRating = document.getElementById("combatRatingSelection").value;
+        const showKey = document.getElementById("combatRatingSelection").key;
+
+        let combatRatingStats = {};
         for(let i = 0; i < baseStats.length; i++) {
             if(combatRating === baseStats[i].combatRating) {
                 combatRatingStats = baseStats[i];
@@ -54,21 +60,8 @@ import {v4 as uuidv4 } from 'uuid'
                 //console.log(combatRatingStats)
             }
         }
-        this.props.updateMonsterStartingPoint(this.state)
-
-        /*console.log('Combat rating stats below')
-        console.log(combatRatingStats)
-
-        console.log('key below')
-        console.log(showKey)
-
-        console.log('uuid function below')
-        console.log(this.generateUuid())*/
-        
-        //for some reason. updating the state seems to lag
-        console.log('state below')
-        console.log(this.state)
     }
+
 
     monsterBaseStatsRender() {
         if(this.state.combatRating === "") {
@@ -108,7 +101,7 @@ import {v4 as uuidv4 } from 'uuid'
                         )}
                 </select>
                 <button>Submit</button>
-                    <h1>{this.monsterBaseStatsRender()}</h1>
+                <h1>{this.monsterBaseStatsRender()}</h1>
             </form>
         )
             

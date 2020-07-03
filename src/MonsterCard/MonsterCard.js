@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './MonsterCard.css'
 
-class BaseMonsterStats extends Component {
+class MonsterCard extends Component {
     render() {
         const strMod = Math.floor(parseInt((this.props.monsterInfo.mStr)-10)/2)
         const dexMod = Math.floor(parseInt((this.props.monsterInfo.mDex)-10)/2)
@@ -30,4 +30,4 @@ class BaseMonsterStats extends Component {
     }
 }
 
-export default BaseMonsterStats;
+export default MonsterCard;

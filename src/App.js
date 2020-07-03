@@ -59,6 +59,8 @@ class App extends Component {
   }
 
   render() {
+    console.log('Render method call')
+    console.log(this.state)
 
     //const monsterInfo = this.state;
 
