@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import baseStats from './combatRatingStats';
-import './combatRatingSuggestion.css'
-import {v4 as uuidv4 } from 'uuid'
+import './combatRatingSuggestion.css';
+import {v4 as uuidv4 } from 'uuid';
 
  class CombatRatingSuggestion extends Component {
 
@@ -18,6 +17,7 @@ import {v4 as uuidv4 } from 'uuid'
             damagePerRoundSuggestion: "",
             saveDcSuggestion: "",
             saveDc: 0,
+            baseStats: [],
     }
 
     generateUuid(){
@@ -38,24 +38,25 @@ import {v4 as uuidv4 } from 'uuid'
 
     savingUpdatedMonsterInfo() {
         const combatRating = document.getElementById("combatRatingSelection").value;
-        const showKey = document.getElementById("combatRatingSelection").key;
+        //const showKey = document.getElementById("combatRatingSelection").key;
 
         let combatRatingStats = {};
+        let baseStats = this.props.startingValues;
         for(let i = 0; i < baseStats.length; i++) {
-            if(combatRating === baseStats[i].combatRating) {
+            if(combatRating === baseStats[i].combat_rating) {
                 combatRatingStats = baseStats[i];
-                this.setState({combatRating: combatRatingStats.combatRating});
-                this.setState({proficiencyBonus: combatRatingStats.proficiencyBonus});
-                this.setState({armorClassSuggestion: combatRatingStats.armorClassSuggestion});
-                this.setState({armorClassStartingPoint: combatRatingStats.armorClassStartingPoint});
-                this.setState({hitPointsSuggestion: combatRatingStats.hitPointsSuggestion});
-                this.setState({hitPointsMin: combatRatingStats.hitPointsMin});
-                this.setState({hitPointsMax: combatRatingStats.hitPointsMax});
-                this.setState({attackBonusSuggestion: combatRatingStats.attackBonusSuggestion});
-                this.setState({attackBonus: combatRatingStats.attackBonus});
-                this.setState({damagePerRoundSuggestion: combatRatingStats.damagePerRoundSuggestion});
-                this.setState({saveDcSuggestion: combatRatingStats.saveDcSuggestion});
-                this.setState({saveDc: combatRatingStats.saveDc});
+                this.setState({combatRating: combatRatingStats.combat_rating});
+                this.setState({proficiencyBonus: combatRatingStats.proficiencybonus});
+                this.setState({armorClassSuggestion: combatRatingStats.armorclasssuggestion});
+                this.setState({armorClassStartingPoint: combatRatingStats.armorclassstartingpoint});
+                this.setState({hitPointsSuggestion: combatRatingStats.hitpointssuggestion});
+                this.setState({hitPointsMin: combatRatingStats.hitpointsmin});
+                this.setState({hitPointsMax: combatRatingStats.hitpointsmax});
+                this.setState({attackBonusSuggestion: combatRatingStats.attackbonussuggestion});
+                this.setState({attackBonus: combatRatingStats.attackbonus});
+                this.setState({damagePerRoundSuggestion: combatRatingStats.damageperroundsuggestion});
+                this.setState({saveDcSuggestion: combatRatingStats.savedcsuggestion});
+                this.setState({saveDc: combatRatingStats.savedc});
             }
         }
     }
@@ -91,12 +92,12 @@ import {v4 as uuidv4 } from 'uuid'
             <form onSubmit = {this.handleSubmit}>
                 <lable htlmfor="combatRatingSelection">Select a combat raiting</lable>
                 <select name="combatRatingSelection" id="combatRatingSelection">
-                    {baseStats.map( cr => 
+                    {this.props.startingValues.map( cr => 
                         <option
-                            value = {cr.combatRating}
+                            value = {cr.combat_rating}
                             key = {this.generateUuid()}
-                        >{cr.combatRating}</option>
-                        )}
+                        >{cr.combat_rating}</option>
+                    )}
                 </select>
                 <button>Submit</button>
                 <h1>{this.monsterBaseStatsRender()}</h1>

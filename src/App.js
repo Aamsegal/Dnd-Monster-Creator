@@ -3,24 +3,49 @@ import './App.css'
 import BaseMonsterStats from './BaseMonsterStats/baseMonsterStats'
 import MonsterCard from './MonsterCard/MonsterCard'
 import CombatRatingSuggestion from './CombatRatingSuggestion/combatRatingSuggestion'
+import config from './config';
+//import DndContext from './DndContenxt';
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-      this.state = {
-        mName: '',
-        mType: '',
-        mArmor: 0,
-        mHp: 0,
-        mSpeed: 0,
-        mStr: 10,
-        mDex: 10,
-        mCon: 10,
-        mInt: 10,
-        mWis: 10,
-        mCha: 10
-    }
+  state = {
+    mName: '',
+    mType: '',
+    mArmor: 0,
+    mHp: 0,
+    mSpeed: 0,
+    mStr: 10,
+    mDex: 10,
+    mCon: 10,
+    mInt: 10,
+    mWis: 10,
+    mCha: 10,
+    startingPoint: []   
   }
+
+  componentDidMount() {
+    Promise.all([
+        fetch(`${config.API_ENDPOINT}/api/monsterStartingPoint`)
+    ])
+        .then(([suggestionRes]) => {
+          if(!suggestionRes.ok)
+              
+            return suggestionRes.json().then(e => Promise.reject(e));
+          return Promise.all([suggestionRes.json()])
+        })
+
+        .then(([startingPointStats]) => {
+          console.log(startingPointStats)
+          this.setState({ 
+            startingPoint: startingPointStats
+           });
+        })
+
+        .catch(error => {
+          console.error({error})
+        })
+
+        //console.log(this.state.startingPoint)
+}
 
   updateMonsterStats = monsterValues => {
     
@@ -33,6 +58,7 @@ class App extends Component {
       this.setState({x: monsterValues.x})
       
     }*/
+      
       this.setState({mName: monsterValues.mName})
       this.setState({mType: monsterValues.mType})
       this.setState({mArmor: monsterValues.mArmor})
@@ -44,7 +70,6 @@ class App extends Component {
       this.setState({mInt: monsterValues.mInt})
       this.setState({mWis: monsterValues.mWis})
       this.setState({mCha: monsterValues.mCha})
-    
   }
 
   updateMonsterStartingPoint = monsterStartingPoint => {
@@ -59,15 +84,19 @@ class App extends Component {
   render() {
 
     return (
+      //<a href="<GENERATED_GOOGLE_URL>">Login with Google</a>
+      //<DndContext.Provider value={value}>
+        <main className='App'>
 
-      <main className='App'>
-        <CombatRatingSuggestion updateMonsterStartingPoint={this.updateMonsterStartingPoint}/>
-  
-        <BaseMonsterStats updateMonsterStats={this.updateMonsterStats}/>
+          <CombatRatingSuggestion updateMonsterStartingPoint={this.updateMonsterStartingPoint} startingValues={this.state.startingPoint}/>
 
-        <MonsterCard monsterInfo={this.state} />
+          <BaseMonsterStats updateMonsterStats={this.updateMonsterStats}/>
 
-      </main>
+          <MonsterCard monsterInfo={this.state} />
+
+        </main>
+      //</DndContext.Provider>
+      
     )
   }
 }
