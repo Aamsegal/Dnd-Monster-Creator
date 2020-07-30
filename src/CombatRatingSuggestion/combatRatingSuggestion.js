@@ -5,7 +5,7 @@ import {v4 as uuidv4 } from 'uuid';
  class CombatRatingSuggestion extends Component {
 
     state = {
-            combatRating: "",
+            combatRating: '',
             proficiencyBonus: 0,
             armorClassSuggestion: "",
             armorClassStartingPoint: 0,
@@ -90,7 +90,7 @@ import {v4 as uuidv4 } from 'uuid';
 
         return(
             <form onSubmit = {this.handleSubmit}>
-                <lable htlmfor="combatRatingSelection">Select a combat raiting</lable>
+                <label htlmfor="combatRatingSelection">Select a combat raiting</label>
                 <select name="combatRatingSelection" id="combatRatingSelection">
                     {this.props.startingValues.map( cr => 
                         <option
