@@ -3,6 +3,7 @@ import './App.css'
 import BaseMonsterStats from './BaseMonsterStats/baseMonsterStats'
 import MonsterCard from './MonsterCard/MonsterCard'
 import CombatRatingSuggestion from './CombatRatingSuggestion/combatRatingSuggestion'
+import LoadingMonsters from './LoadingMonsters/LoadingMonsters'
 import config from './config';
 //import movesRouter from '../../dnd-monster-creator-server/monsterMoves/monsterMoves-router';
 //import DndContext from './DndContenxt';
@@ -319,15 +320,19 @@ class App extends Component {
     })
   }
 
+  downloadMonsterList = monsterList => {
+
+  }
+
   render() {
 
     return (
-      //<a href="<GENERATED_GOOGLE_URL>">Login with Google</a>
-      //<DndContext.Provider value={value}>
         <main className='App'>
 
           <CombatRatingSuggestion updateMonsterStartingPoint={this.updateMonsterStartingPoint} startingValues={this.state.startingPoint}/>
 
+          <LoadingMonsters userId={this.state.monsterStats.user_id}/>
+          
           <BaseMonsterStats updateMonsterStats={this.updateMonsterStats}/>
 
           <MonsterCard monsterInfo={this.state.monsterStats} saveMonsterFunction={this.saveMonster}/>
