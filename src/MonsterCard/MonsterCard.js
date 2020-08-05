@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ActionList from '../ActionList/actionList'
 import './MonsterCard.css'
 
 class MonsterCard extends Component {
@@ -8,6 +9,7 @@ class MonsterCard extends Component {
             this.props.saveMonsterFunction(this.props.monsterInfo)
         }
 
+
         render() {
         const strMod = Math.floor(parseInt((this.props.monsterInfo.mStr)-10)/2)
         const dexMod = Math.floor(parseInt((this.props.monsterInfo.mDex)-10)/2)
@@ -15,6 +17,8 @@ class MonsterCard extends Component {
         const intMod = Math.floor(parseInt((this.props.monsterInfo.mInt)-10)/2)
         const wisMod = Math.floor(parseInt((this.props.monsterInfo.mWis)-10)/2)
         const chaMod = Math.floor(parseInt((this.props.monsterInfo.mCha)-10)/2)
+
+        
         //console.log(this.props)
 
         
@@ -43,6 +47,7 @@ class MonsterCard extends Component {
                     <li>Languages: {this.props.monsterInfo.mLanguage}</li>
                     <li>Notes: {this.props.monsterInfo.mENotes}</li>
                 </ul>
+                <ActionList monsterInfo={this.props.monsterInfo} monsterMoves={this.props.monsterMoves}/>
                 <button name='saveMonster' id='saveMonster' onClick={this.saveMonsterCard}>Save Monster</button>
             </div>
         )

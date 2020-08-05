@@ -21,30 +21,27 @@ class BaseMonsterStats extends Component {
         mImmune: '',
         mSenses: '',
         mLanguage: '',
-        mEnotes: ''
+        mEnotes: '',
+        monsterMove: {}
     }
 
     handleSubmit = e => {
-        e.preventDefault()
-        /*const strSaveValue = document.getElementById("strSave").value;
-        const dexSaveValue = document.getElementById("dexSave").value;
-        const conSaveValue = document.getElementById("conSave").value;
-        const intSaveValue = document.getElementById("intSave").value;
-        const wisSaveValue = document.getElementById("wisSave").value;
-        const chaSaveValue = document.getElementById("chaSave").value;
-        console.log(`${strSaveValue}, ${dexSaveValue}, ${conSaveValue}, ${intSaveValue}, ${wisSaveValue}, ${chaSaveValue}`)
-        console.log('Handle submit works')*/
-        
+        e.preventDefault()        
         this.props.updateMonsterStats(this.state)
     }
 
     handleMovesSubmit = e => {
         e.preventDefault()
-        console.log('thisworks')
+        const action_name = document.getElementById("action_name").value;
+        const action_type = document.getElementById("action_type").value;
+        const action_details = document.getElementById("action_details").value;
+        const damage_dice = document.getElementById("damage_dice").value;
+        const full_action = {action_name: action_name, action_type: action_type, action_details: action_details,
+            damage_dice: damage_dice};
+        this.props.addMonsterAttack(full_action)
     }
 
     formVisibility(value) {
-        console.log(value)
 
         if (value === 1) {
             document.getElementById('baseStatsForm').style.display = "block";
@@ -83,6 +80,10 @@ class BaseMonsterStats extends Component {
                         <label htmlFor="mProf">Proficiency</label>
                         <input type="number" id="mProf" name='proficienct' placeholder='2-15' min="2" max="15"
                         value={this.state.mProf} onChange= {(e) => this.setState({mProf: e.currentTarget.value})}></input>
+
+                        <label htmlFor="mAtk">Attack Bonus</label>
+                        <input type="number" id="mAtk" name='attackBonus' placeholder='3-15' min="3" max="15"
+                        value={this.state.mAtk} onChange= {(e) => this.setState({mAtk: e.currentTarget.value})}></input>
 
                         <label htmlFor="armor">Armor Class</label>
                         <input type="number" id="mArmor" name="armor" placeholder="0-25" min="0" max="25"
@@ -175,14 +176,26 @@ class BaseMonsterStats extends Component {
                     </form>
                 </div>
                 
-                <div  id="movesForm">
+                <div  id="movesForm" style={{display: 'none'}}>
                     <form onSubmit={this.handleMovesSubmit}>
-                        <label htmlFor="moveName">Name</label>
-                        <input type="text" id="moveName" name="moveName"></input>
+                        <label htmlFor="action_name">Name</label>
+                        <input type="text" id="action_name" name="action_name"></input>
+
+                        <label htmlFor="action_type">Action Type</label>
+                        <select id='action_type' name='action_type'>
+                            <option value="Action" key="Action">Action</option>
+                            <option value="Reaction" key="Reaction">Reaction</option>
+                            <option value="Skill" key="Skill">Skill</option>
+                        </select>
+
+                        <label htmlFor="action_details">Details</label>
+                        <input type="text" id="action_details" name="action_details" placeholder="The creature swings with its sword"></input>
+
+                        <label htmlFor="damage_dice">Damage Dice</label>
+                        <input type="text" id="damage_dice" name="damage_dice" placeholder="1d4, 1d8, 2d6"></input>
                         <button>Submit</button>
                     </form>
                 </div>
-                
             </div>
         )
     }

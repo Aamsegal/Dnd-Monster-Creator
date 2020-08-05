@@ -12,6 +12,7 @@ class App extends Component {
   state = {
     monsterStats: {
       user_id: 1,
+      monster_id: 1,
       mName: '',
       mType: '',
       mCr: '0',
@@ -86,6 +87,18 @@ class App extends Component {
         monsterStats: {
           ...prevState.monsterStats,
           mCr: monsterValues.mCr
+      }}))
+
+      this.setState(prevState => ({
+        monsterStats: {
+          ...prevState.monsterStats,
+          mProf: monsterValues.mProf
+      }}))
+
+      this.setState(prevState => ({
+        monsterStats: {
+          ...prevState.monsterStats,
+          mAtk: monsterValues.mAtk
       }}))
 
       this.setState( prevState => ({
@@ -320,8 +333,8 @@ class App extends Component {
     })
   }
 
-  downloadMonsterList = monsterList => {
-
+  addMonsterAttack = full_action => {
+    this.setState({ monsterMoves: [...this.state.monsterMoves, full_action]});
   }
 
   render() {
@@ -333,9 +346,9 @@ class App extends Component {
 
           <LoadingMonsters userId={this.state.monsterStats.user_id}/>
           
-          <BaseMonsterStats updateMonsterStats={this.updateMonsterStats}/>
+          <BaseMonsterStats updateMonsterStats={this.updateMonsterStats} addMonsterAttack={this.addMonsterAttack}/>
 
-          <MonsterCard monsterInfo={this.state.monsterStats} saveMonsterFunction={this.saveMonster}/>
+          <MonsterCard monsterInfo={this.state.monsterStats} saveMonsterFunction={this.saveMonster} monsterMoves={this.state.monsterMoves}/>
 
         </main>
       //</DndContext.Provider>
