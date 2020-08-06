@@ -34,7 +34,7 @@ class App extends Component {
       mWisSave: false,
       mCha: 10,
       mChaSave: false,
-      mVuln: '',
+      mVul: '',
       mRes: '',
       mImmune: '',
       mSenses: '',
@@ -76,7 +76,6 @@ class App extends Component {
   }
   //  Updates the state of all the values sent up from baseMonsterStats
   updateMonsterStats = monsterValues => {
-      console.log('updateMonsterStats')
       this.setState(prevState => ({
         monsterStats: {
           ...prevState.monsterStats,
@@ -99,6 +98,12 @@ class App extends Component {
         monsterStats: {
           ...prevState.monsterStats,
           mAtk: monsterValues.mAtk
+      }}))
+
+      this.setState(prevState => ({
+        monsterStats: {
+          ...prevState.monsterStats,
+          mSaveDc: monsterValues.mSaveDc
       }}))
 
       this.setState( prevState => ({
@@ -259,6 +264,7 @@ class App extends Component {
     let armorclass = monsterInfo.mArmor;
     let hitpoints = monsterInfo.mHp;
     let attackbonus = monsterInfo.mAtk;
+    let speed = monsterInfo.mSpeed;
     let savedc = monsterInfo.mSaveDc;
     let strength = monsterInfo.mStr;
     let strengthsave = monsterInfo.mStrSave;
@@ -288,6 +294,7 @@ class App extends Component {
       armorclass: armorclass,
       hitpoints: hitpoints,
       attackbonus: attackbonus,
+      speed: speed,
       savedc: savedc,
       strength: strength,
       strengthsave: strengthsave,
@@ -333,6 +340,177 @@ class App extends Component {
     })
   }
 
+  loadSavedMonsterStats = savedMonsterStats => {
+    console.log(savedMonsterStats)
+    this.setState(prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        monster_id: savedMonsterStats.id
+    }}))
+
+    this.setState(prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mName: savedMonsterStats.monster_name
+    }}))
+
+    this.setState(prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mType: savedMonsterStats.monster_type
+    }}))
+
+    this.setState(prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mCr: savedMonsterStats.challenge_rating
+    }}))
+
+    this.setState(prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mAtk: savedMonsterStats.attackbonus
+    }}))
+
+    this.setState(prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mSaveDc: savedMonsterStats.saveDc
+    }}))
+
+    this.setState(prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mProf: savedMonsterStats.proficiencybonus
+    }}))
+
+    this.setState(prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mArmor: savedMonsterStats.armorclass
+    }}))
+
+    this.setState(prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mHp: savedMonsterStats.hitpoints
+    }}))
+
+    this.setState(prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mSpeed: savedMonsterStats.speed
+    }}))
+
+    this.setState(prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mStr: savedMonsterStats.strength
+    }}))
+
+    this.setState(prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mStrSave: savedMonsterStats.strengthsave
+    }}))
+
+    this.setState(prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mDex: savedMonsterStats.dexterity
+    }}))
+
+    this.setState(prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mDexSave: savedMonsterStats.dexteritysave
+    }}))
+
+    this.setState(prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mCon: savedMonsterStats.constitution
+    }}))
+
+    this.setState(prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mConSave: savedMonsterStats.constitutionsave
+    }}))
+
+    this.setState(prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mInt: savedMonsterStats.inteligence
+    }}))
+
+    this.setState(prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mIntSave: savedMonsterStats.inteligencesave
+    }}))
+
+    this.setState(prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mWis: savedMonsterStats.wisdom
+    }}))
+
+    this.setState(prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mWisSave: savedMonsterStats.wisdomsave
+    }}))
+
+    this.setState(prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mCha: savedMonsterStats.charisma
+    }}))
+
+    this.setState(prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mChaSave: savedMonsterStats.charismasave
+    }}))
+
+    this.setState(prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mVul: savedMonsterStats.vulnerability
+    }}))
+
+    this.setState(prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mRes: savedMonsterStats.resistance
+    }}))
+
+    this.setState(prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mImmune: savedMonsterStats.immunities
+    }}))
+
+    this.setState(prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mSenses: savedMonsterStats.senses
+    }}))
+
+    this.setState(prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mLanguage: savedMonsterStats.language
+    }}))
+
+    this.setState(prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mEnotes: savedMonsterStats.notes
+    }}))
+  }
+
   addMonsterAttack = full_action => {
     this.setState({ monsterMoves: [...this.state.monsterMoves, full_action]});
   }
@@ -344,7 +522,7 @@ class App extends Component {
 
           <CombatRatingSuggestion updateMonsterStartingPoint={this.updateMonsterStartingPoint} startingValues={this.state.startingPoint}/>
 
-          <LoadingMonsters userId={this.state.monsterStats.user_id}/>
+          <LoadingMonsters userId={this.state.monsterStats.user_id} loadSavedMonsterStats={this.loadSavedMonsterStats}/>
           
           <BaseMonsterStats updateMonsterStats={this.updateMonsterStats} addMonsterAttack={this.addMonsterAttack}/>
 

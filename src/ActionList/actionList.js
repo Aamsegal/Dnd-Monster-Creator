@@ -4,7 +4,7 @@ import './actionList.css'
 class ActionList extends Component {
     render () {
         return (
-            <div id="monsterMovesContainer" class="monsterMovesContainer">
+            <div id="monsterMovesContainer" className="monsterMovesContainer">
                 {this.props.monsterMoves.map( action => 
                     <span id={action.action_name}>
                         <p>{action.action_name}</p>

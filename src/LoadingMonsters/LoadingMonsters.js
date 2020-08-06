@@ -11,7 +11,16 @@ class LoadingMonsters extends Component {
 
     selectMonster = e => {
         e.preventDefault()
-        console.log('selectMonster runs')
+        const monsterList = this.state.monsters
+        const selectedMonsterid = parseInt(document.getElementById('monsterListImport').value);
+        let selectedMonster = []
+
+        for (let i=0; i < monsterList.length; i++) {
+            if(monsterList[i].id === selectedMonsterid) {
+                selectedMonster = monsterList[i]
+            }
+        }
+        this.props.loadSavedMonsterStats(selectedMonster)
     }
 
     reloadMonsters = e => {

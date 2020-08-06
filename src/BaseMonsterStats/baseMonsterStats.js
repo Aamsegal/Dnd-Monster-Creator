@@ -85,6 +85,10 @@ class BaseMonsterStats extends Component {
                         <input type="number" id="mAtk" name='attackBonus' placeholder='3-15' min="3" max="15"
                         value={this.state.mAtk} onChange= {(e) => this.setState({mAtk: e.currentTarget.value})}></input>
 
+                        <label htmlFor="mSaveDc">Save Dc</label>
+                        <input type="number" id="mSaveDc" name='savedc' placeholder='10-23' min="10" max="25"
+                        value={this.state.mSaveDc} onChange= {(e) => this.setState({mSaveDc: e.currentTarget.value})}></input>
+
                         <label htmlFor="armor">Armor Class</label>
                         <input type="number" id="mArmor" name="armor" placeholder="0-25" min="0" max="25"
                         value={this.state.mArmor}

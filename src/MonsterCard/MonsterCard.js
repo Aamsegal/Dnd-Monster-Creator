@@ -45,7 +45,7 @@ class MonsterCard extends Component {
                     <li>Immunities: {this.props.monsterInfo.mImmune}</li>
                     <li>Senses: {this.props.monsterInfo.mSenses}</li>
                     <li>Languages: {this.props.monsterInfo.mLanguage}</li>
-                    <li>Notes: {this.props.monsterInfo.mENotes}</li>
+                    <li>Notes: {this.props.monsterInfo.mEnotes}</li>
                 </ul>
                 <ActionList monsterInfo={this.props.monsterInfo} monsterMoves={this.props.monsterMoves}/>
                 <button name='saveMonster' id='saveMonster' onClick={this.saveMonsterCard}>Save Monster</button>
