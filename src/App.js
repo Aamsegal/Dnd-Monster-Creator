@@ -7,12 +7,13 @@ import LoadingMonsters from './LoadingMonsters/LoadingMonsters'
 import config from './config';
 //import movesRouter from '../../dnd-monster-creator-server/monsterMoves/monsterMoves-router';
 //import DndContext from './DndContenxt';
+var temp = 0;
 
 class App extends Component {
   state = {
     monsterStats: {
       user_id: 1,
-      monster_id: 1,
+      monster_id: 0,
       mName: '',
       mType: '',
       mCr: '0',
@@ -255,7 +256,6 @@ class App extends Component {
 
   //  Uses the state to save the monster info
   saveMonster = monsterInfo => {
-    console.log('Save monster was called')
     let user_id = monsterInfo.user_id;
     let monster_name = monsterInfo.mName;
     let monster_type = monsterInfo.mType;
@@ -326,17 +326,54 @@ class App extends Component {
     
     
     .then(res => {
-      if (!res.ok)
+      if (!res.ok) {
         return res.json().then(e => Promise.reject(e))
-      return res.json()
+      }
+      return res.json();
     })
 
-    /*.then(data => {
+    .then(data => {
 
-    })*/
+      this.setState( prevState => ({
+        monsterStats: {
+          ...prevState.monsterStats,
+          monster_id: data.id
+      }}))      
+    })
+
+    .then(() => {
+      const monsterMoves = this.state.monsterMoves;
+      
+      this.saveMoves(monsterMoves)
+    })
 
     .catch(error => {
-      //this.setState({ error })
+      console.error({error})
+    })
+  }
+
+  saveMoves = monsterMoves => {
+    
+    monsterMoves.forEach((info) => {
+      info['monster_id'] = this.state.monsterStats.monster_id;
+      fetch(`${config.API_ENDPOINT}/api/monsterMoves`, {
+        method: 'POST',
+        body: JSON.stringify(info),
+        headers: {
+          'content-type': 'application/json'
+        }
+      })
+
+      .then(res => {
+        if (!res.ok) {
+          return res.json().then(e => Promise.reject(e))
+        }
+        return res.json();
+      })
+
+      .catch(error => {
+        console.error({error})
+      })
     })
   }
 
@@ -513,6 +550,7 @@ class App extends Component {
 
   addMonsterAttack = full_action => {
     this.setState({ monsterMoves: [...this.state.monsterMoves, full_action]});
+
   }
 
   render() {
