@@ -14,8 +14,8 @@ class App extends Component {
     monsterStats: {
       user_id: 1,
       monster_id: 0,
-      mName: 'TestingDeletingAttacks',
-      mType: 'Test',
+      mName: '',
+      mType: '',
       mCr: '0',
       mAtk: 0,
       mSaveDc: 0,
@@ -207,7 +207,6 @@ class App extends Component {
   //  used input from the combat rating suggestions
   //sets average hit points and average AC and save them in the state
   updateMonsterStartingPoint = monsterStartingPoint => {
-    console.log('updateMonsterStartingPoint called')
 
     let averageAc = monsterStartingPoint.armorClassStartingPoint;
     let averageHitpoints = Math.floor((monsterStartingPoint.hitPointsMin+monsterStartingPoint.hitPointsMax)/2);
@@ -377,6 +376,10 @@ class App extends Component {
         console.error({error})
       })
     })
+  }
+
+  loadSavedMonsters = savedMonsters => {
+    this.setState({monster: savedMonsters})
   }
 
   loadSavedMonsterStats = savedMonsterStats => {
@@ -573,6 +576,36 @@ class App extends Component {
 
   }
 
+  deleteMonster = monsterId => {
+    const toBeDeletedId = parseInt(monsterId);
+    const monsterList = this.state.monsters;
+    
+    monsterList.forEach((monster, i) => {
+      
+      if(monster.id === toBeDeletedId) {
+        fetch(`${config.API_ENDPOINT}/api/monsters/monsterId/${toBeDeletedId}`, {
+          method: 'DELETE',
+          headers: {
+            'content-type': 'application/json'
+          }
+        })
+
+        .then(res => {
+          if (!res.ok)
+            return res.json().then(e => Promise.reject(e))
+          
+          let newMonsterList = this.state.monsters;
+          newMonsterList.splice(i,1);
+          this.setState({monsters: newMonsterList})
+          return res.json
+        })
+
+        .catch(error =>
+          console.error({error}))
+      }
+    })
+  }
+
   deleteMonsterAttack = monsterAttack_Id => {
     const selectedMoveId = monsterAttack_Id;
     const monsterMoveList = this.state.monsterMoves
@@ -614,7 +647,10 @@ class App extends Component {
 
           <LoadingMonsters
             userId={this.state.monsterStats.user_id} 
+            loadSavedMonsters={this.loadSavedMonsters}
+            monsters={this.state.monsters}
             loadSavedMonsterStats={this.loadSavedMonsterStats}
+            deleteMonster={this.deleteMonster}
           />
           
           <BaseMonsterStats 

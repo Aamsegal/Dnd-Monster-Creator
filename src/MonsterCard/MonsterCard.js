@@ -5,7 +5,6 @@ import './MonsterCard.css'
 class MonsterCard extends Component {
         saveMonsterCard = e => {
             e.preventDefault()
-            console.log('Save monster card in monstercard.js is called')
             this.props.saveMonsterFunction(this.props.monsterInfo)
         }
 
@@ -18,10 +17,6 @@ class MonsterCard extends Component {
         const wisMod = Math.floor(parseInt((this.props.monsterInfo.mWis)-10)/2)
         const chaMod = Math.floor(parseInt((this.props.monsterInfo.mCha)-10)/2)
 
-        
-        //console.log(this.props)
-
-        
         return (
             <div className = 'monsterCard'>
                 <ul>
