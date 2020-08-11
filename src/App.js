@@ -352,6 +352,8 @@ class App extends Component {
     })
   }
 
+  //  Grabs monster id then uses theid as part of the move post request
+  //along with the other info from the form
   saveMoves = monsterMoves => {
     
     monsterMoves.forEach((info) => {
@@ -545,6 +547,25 @@ class App extends Component {
         ...prevState.monsterStats,
         mEnotes: savedMonsterStats.notes
     }}))
+
+    this.loadSavedMonsterMoves(savedMonsterStats)
+  }
+
+  loadSavedMonsterMoves = savedMonsterStats => {
+    const selectedMonsterId = savedMonsterStats.id;
+    
+    fetch(`${config.API_ENDPOINT}/api/monsterMoves/specificMonster/${selectedMonsterId}`)
+    
+    .then(res => {
+      if (!res.ok)
+        return res.json().then(e => Promise.reject(e))
+      
+      return res.json()
+    })
+
+    .then(data => {
+      this.setState({monsterMoves: data})
+    })
   }
 
   addMonsterAttack = full_action => {
