@@ -47,7 +47,11 @@ class MonsterCard extends Component {
                     <li>Languages: {this.props.monsterInfo.mLanguage}</li>
                     <li>Notes: {this.props.monsterInfo.mEnotes}</li>
                 </ul>
-                <ActionList monsterInfo={this.props.monsterInfo} monsterMoves={this.props.monsterMoves}/>
+                <ActionList 
+                    monsterInfo={this.props.monsterInfo} 
+                    monsterMoves={this.props.monsterMoves}
+                    deleteMonsterAttack={this.props.deleteMonsterAttack}
+                />
                 <button name='saveMonster' id='saveMonster' onClick={this.saveMonsterCard}>Save Monster</button>
             </div>
         )

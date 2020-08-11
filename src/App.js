@@ -14,8 +14,8 @@ class App extends Component {
     monsterStats: {
       user_id: 1,
       monster_id: 0,
-      mName: '',
-      mType: '',
+      mName: 'TestingDeletingAttacks',
+      mType: 'Test',
       mCr: '0',
       mAtk: 0,
       mSaveDc: 0,
@@ -378,7 +378,6 @@ class App extends Component {
   }
 
   loadSavedMonsterStats = savedMonsterStats => {
-    console.log(savedMonsterStats)
     this.setState(prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
@@ -553,18 +552,61 @@ class App extends Component {
 
   }
 
+  deleteMonsterAttack = monsterAttack_Id => {
+    const selectedMoveId = monsterAttack_Id;
+    const monsterMoveList = this.state.monsterMoves
+    monsterMoveList.forEach((move, i) => {
+      if(move.id === selectedMoveId) {
+        fetch(`${config.API_ENDPOINT}/api/monsterMoves/${selectedMoveId}`, {
+          method: 'DELETE',
+          headers: {
+            'content-type': 'application/json'
+          }
+        })
+
+        .then(res => {
+          if (!res.ok)
+            return res.json().then(e => Promise.reject(e))
+
+          let newMoveList = this.state.monsterMoves;
+          newMoveList.splice(i,1)
+          this.setState({monsterMoves: newMoveList})
+          return res.json
+        })
+
+        .catch(error => {
+          console.error({error})
+        })
+      }
+    })
+  }
+
   render() {
 
     return (
         <main className='App'>
 
-          <CombatRatingSuggestion updateMonsterStartingPoint={this.updateMonsterStartingPoint} startingValues={this.state.startingPoint}/>
+          <CombatRatingSuggestion
+            updateMonsterStartingPoint={this.updateMonsterStartingPoint}
+            startingValues={this.state.startingPoint}
+          />
 
-          <LoadingMonsters userId={this.state.monsterStats.user_id} loadSavedMonsterStats={this.loadSavedMonsterStats}/>
+          <LoadingMonsters
+            userId={this.state.monsterStats.user_id} 
+            loadSavedMonsterStats={this.loadSavedMonsterStats}
+          />
           
-          <BaseMonsterStats updateMonsterStats={this.updateMonsterStats} addMonsterAttack={this.addMonsterAttack}/>
+          <BaseMonsterStats 
+            updateMonsterStats={this.updateMonsterStats} 
+            addMonsterAttack={this.addMonsterAttack}
+          />
 
-          <MonsterCard monsterInfo={this.state.monsterStats} saveMonsterFunction={this.saveMonster} monsterMoves={this.state.monsterMoves}/>
+          <MonsterCard 
+            monsterInfo={this.state.monsterStats}
+            saveMonsterFunction={this.saveMonster}
+            monsterMoves={this.state.monsterMoves}
+            deleteMonsterAttack={this.deleteMonsterAttack}
+          />
 
         </main>
       //</DndContext.Provider>

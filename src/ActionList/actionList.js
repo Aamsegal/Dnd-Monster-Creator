@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './actionList.css'
 
 class ActionList extends Component {
-    render () {
+       render () {
         return (
             <div id="monsterMovesContainer" className="monsterMovesContainer">
                 {this.props.monsterMoves.map( action => 
@@ -12,6 +12,7 @@ class ActionList extends Component {
                         <p>{action.action_details}</p>
                         <p>+{this.props.monsterInfo.mProf} to hit</p>
                         <p>{action.damage_dice}+{this.props.monsterInfo.mAtk} Damage</p>
+                        <button id={`button=${action.action_name}`} onClick={() => this.props.deleteMonsterAttack(action.id)}>Delete Action</button>
                     </span>
                     
                 )}
