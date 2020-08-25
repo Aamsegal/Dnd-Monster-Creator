@@ -4,6 +4,8 @@ import BaseMonsterStats from './BaseMonsterStats/baseMonsterStats'
 import MonsterCard from './MonsterCard/MonsterCard'
 import CombatRatingSuggestion from './CombatRatingSuggestion/combatRatingSuggestion'
 import LoadingMonsters from './LoadingMonsters/LoadingMonsters'
+import LoginBar from './loginBar/loginBar'
+import { v4 as uuidv4 } from 'uuid';
 import config from './config';
 //import movesRouter from '../../dnd-monster-creator-server/monsterMoves/monsterMoves-router';
 //import DndContext from './DndContenxt';
@@ -14,8 +16,8 @@ class App extends Component {
     monsterStats: {
       user_id: 1,
       monster_id: 0,
-      mName: '',
-      mType: '',
+      mName: 'Test Name',
+      mType: 'Test id',
       mCr: '0',
       mAtk: 0,
       mSaveDc: 0,
@@ -24,17 +26,11 @@ class App extends Component {
       mHp: 0,
       mSpeed: 0,
       mStr: 10,
-      mStrSave: false,
       mDex: 10,
-      mDexSave: false,
       mCon: 10,
-      mConSave: false,
       mInt: 10,
-      mIntSave: false,
       mWis: 10,
-      mWisSave: false,
       mCha: 10,
-      mChaSave: false,
       mVul: '',
       mRes: '',
       mImmune: '',
@@ -75,133 +71,241 @@ class App extends Component {
           console.error({error})
         })
   }
+
+  //  creates a new user in the database and returns the id
+  newUserCreation = username => {
+    let newUserInfo = {id: uuidv4(), username: username}
+    
+    fetch(`${config.API_ENDPOINT}/api/users`, {
+      method: 'POST',
+      body: JSON.stringify(newUserInfo),
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
+
+    .then(res => {
+      /*console.log('First then is called in patch request in app.ks')*/
+      console.log(res)
+      if(!res.ok) {
+        return res.json().then(e => Promise.reject(e))
+      }
+      
+      return res.json()
+    })
+
+    .then(data => {
+      window.alert(`Please save this value for login 
+      
+      ${data.id}`)
+    })
+
+    .catch(error => {
+      console.error({error})
+    })
+  }
+
+  userLogin = userLoginInfo => {
+    let loginId = userLoginInfo.id
+    let loginUsername = userLoginInfo.username
+
+    fetch(`${config.API_ENDPOINT}/api/users/${loginId}/${loginUsername}`, {
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
+
+    .then(res => {
+      if(!res.ok) {
+        return res.json().then(e => Promise.reject(e))
+      }
+      
+      return res.json()
+    })
+
+    .then(data => {
+      if(data.length === 0) {
+        window.alert('Your login crudentials were wrong');
+      } else {
+        window.alert(`You have logged into ${data[0].username}`)
+
+        this.setState(prevState => ({
+          monsterStats: {
+            ...prevState.monsterStats,
+            user_id: data[0].id
+        }}))
+
+        let loggedInUserId = data[0].id
+        this.loadMonsterList(loggedInUserId)
+      }
+    })
+
+    .catch(error => {
+      console.error({error})
+    })
+  }
+
+  loadMonsterList = userId => {
+    
+    fetch(`${config.API_ENDPOINT}/api/monsters/userId/${userId}`, {
+      method: 'GET',
+      header: {
+        'content-type': 'application/json'
+      }
+    })
+
+    .then(res => {
+      if(!res.ok) {
+        return res.json().then(e => Promise.reject(e))
+      }
+
+      return res.json()
+    })
+
+    .then(monsters => {
+      console.log(monsters)
+      this.setState({monsters})
+    })
+  }
+
   //  Updates the state of all the values sent up from baseMonsterStats
   updateMonsterStats = monsterValues => {
-      this.setState(prevState => ({
-        monsterStats: {
-          ...prevState.monsterStats,
-          mName: monsterValues.mName
-      }}))
+    if(this.state.monsterStats.monster_id === 0) {
+      let uniqueMonsterId = uuidv4();
 
       this.setState(prevState => ({
         monsterStats: {
           ...prevState.monsterStats,
-          mCr: monsterValues.mCr
+          monster_id: uniqueMonsterId
       }}))
+    }
+    
+    this.setState(prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mName: monsterValues.mName
+    }}))
 
-      this.setState(prevState => ({
-        monsterStats: {
-          ...prevState.monsterStats,
-          mProf: monsterValues.mProf
-      }}))
+    this.setState(prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mCr: monsterValues.mCr
+    }}))
 
-      this.setState(prevState => ({
-        monsterStats: {
-          ...prevState.monsterStats,
-          mAtk: monsterValues.mAtk
-      }}))
+    this.setState(prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mProf: monsterValues.mProf
+    }}))
 
-      this.setState(prevState => ({
-        monsterStats: {
-          ...prevState.monsterStats,
-          mSaveDc: monsterValues.mSaveDc
-      }}))
+    this.setState(prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mAtk: monsterValues.mAtk
+    }}))
 
-      this.setState( prevState => ({
-        monsterStats: {
-          ...prevState.monsterStats,
-          mType: monsterValues.mType
-      }}))
+    this.setState(prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mSaveDc: monsterValues.mSaveDc
+    }}))
 
-      this.setState( prevState => ({
-        monsterStats: {
-          ...prevState.monsterStats,
-          mArmor: monsterValues.mArmor
-      }}))
+    this.setState( prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mType: monsterValues.mType
+    }}))
 
-      this.setState( prevState => ({
-        monsterStats: {
-          ...prevState.monsterStats,
-          mHp: monsterValues.mHp
-      }}))
+    this.setState( prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mArmor: monsterValues.mArmor
+    }}))
 
-      this.setState( prevState => ({
-        monsterStats: {
-          ...prevState.monsterStats,
-          mSpeed: monsterValues.mSpeed
-      }}))
-      
-      this.setState( prevState => ({
-        monsterStats: {
-          ...prevState.monsterStats,
-          mStr: monsterValues.mStr
-      }}))
-      
-      this.setState( prevState => ({
-        monsterStats: {
-          ...prevState.monsterStats,
-          mDex: monsterValues.mDex
-      }}))
-      
-      this.setState( prevState => ({
-        monsterStats: {
-          ...prevState.monsterStats,
-          mCon: monsterValues.mCon
-      }}))
-      
-      this.setState( prevState => ({
-        monsterStats: {
-          ...prevState.monsterStats,
-          mInt: monsterValues.mInt
-      }}))
-      
-      this.setState( prevState => ({
-        monsterStats: {
-          ...prevState.monsterStats,
-          mWis: monsterValues.mWis
-      }}))
-      
-      this.setState( prevState => ({
-        monsterStats: {
-          ...prevState.monsterStats,
-          mCha: monsterValues.mCha
-      }}))
+    this.setState( prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mHp: monsterValues.mHp
+    }}))
 
-      this.setState( prevState => ({
-        monsterStats: {
-          ...prevState.monsterStats,
-          mVuln: monsterValues.mVuln
-      }}))
+    this.setState( prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mSpeed: monsterValues.mSpeed
+    }}))
+    
+    this.setState( prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mStr: monsterValues.mStr
+    }}))
+    
+    this.setState( prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mDex: monsterValues.mDex
+    }}))
+    
+    this.setState( prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mCon: monsterValues.mCon
+    }}))
+    
+    this.setState( prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mInt: monsterValues.mInt
+    }}))
+    
+    this.setState( prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mWis: monsterValues.mWis
+    }}))
+    
+    this.setState( prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mCha: monsterValues.mCha
+    }}))
 
-      this.setState( prevState => ({
-        monsterStats: {
-          ...prevState.monsterStats,
-          mRes: monsterValues.mRes
-      }}))
+    this.setState( prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mVuln: monsterValues.mVuln
+    }}))
 
-      this.setState( prevState => ({
-        monsterStats: {
-          ...prevState.monsterStats,
-          mImmune: monsterValues.mImmune
-      }}))
+    this.setState( prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mRes: monsterValues.mRes
+    }}))
 
-      this.setState( prevState => ({
-        monsterStats: {
-          ...prevState.monsterStats,
-          mSenses: monsterValues.mSenses
-      }}))
+    this.setState( prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mImmune: monsterValues.mImmune
+    }}))
 
-      this.setState( prevState => ({
-        monsterStats: {
-          ...prevState.monsterStats,
-          mLanguage: monsterValues.mLanguage
-      }}))
+    this.setState( prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mSenses: monsterValues.mSenses
+    }}))
 
-      this.setState( prevState => ({
-        monsterStats: {
-          ...prevState.monsterStats,
-          mEnotes: monsterValues.mEnotes
-      }}))
+    this.setState( prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mLanguage: monsterValues.mLanguage
+    }}))
+
+    this.setState( prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mEnotes: monsterValues.mEnotes
+    }}))
   }
 
   //  used input from the combat rating suggestions
@@ -253,9 +357,12 @@ class App extends Component {
 
   }
 
-  //  Uses the state to save the monster info
+  //  Uses the state to update the monster info
+  //if an error returns saying the monster already exists it creates the monster
+  //running saveNewMonster function
   saveMonster = monsterInfo => {
     let user_id = monsterInfo.user_id;
+    let monster_id = monsterInfo.monster_id;
     let monster_name = monsterInfo.mName;
     let monster_type = monsterInfo.mType;
     let challenge_rating = monsterInfo.mCr;
@@ -266,17 +373,11 @@ class App extends Component {
     let speed = monsterInfo.mSpeed;
     let savedc = monsterInfo.mSaveDc;
     let strength = monsterInfo.mStr;
-    let strengthsave = monsterInfo.mStrSave;
     let dexterity = monsterInfo.mDex;
-    let dexteritysave = monsterInfo.mDexSave;
     let constitution = monsterInfo.mCon;
-    let constitutionsave = monsterInfo.mConSave
     let inteligence = monsterInfo.mInt;
-    let	inteligencesave = monsterInfo.mIntSave;
     let	wisdom = monsterInfo.mWis;
-    let	wisdomsave = monsterInfo.mWisSave;
     let	charisma = monsterInfo.mCha;
-    let	charismasave = monsterInfo.mChaSave;
     let	damagevulnerability = monsterInfo.mVuln;
     let	damageresistances = monsterInfo.mRes;
     let	damageimmunities = monsterInfo.mImmune;
@@ -286,6 +387,7 @@ class App extends Component {
     
     const newMonster = {
       user_id: user_id,
+      id: monster_id,
       monster_name: monster_name,
       monster_type: monster_type,
       challenge_rating: challenge_rating,
@@ -296,17 +398,11 @@ class App extends Component {
       speed: speed,
       savedc: savedc,
       strength: strength,
-      strengthsave: strengthsave,
       dexterity: dexterity,
-      dexteritysave: dexteritysave,
       constitution: constitution,
-      constitutionsave: constitutionsave,
       inteligence: inteligence,
-      inteligencesave: inteligencesave,
       wisdom: wisdom,
-      wisdomsave: wisdomsave,
       charisma: charisma,
-      charismasave: charismasave,
       damagevulnerability: damagevulnerability,
       damageresistances: damageresistances,
       damageimmunities: damageimmunities,
@@ -315,35 +411,26 @@ class App extends Component {
       notes: notes
     }
     
-    fetch(`${config.API_ENDPOINT}/api/monsters`, {
-      method: 'POST',
+    fetch(`${config.API_ENDPOINT}/api/monsters/monsterId/${monster_id}`, {
+      method: 'PATCH',
       body: JSON.stringify(newMonster),
       headers: {
         'content-type': 'application/json'
       }
     })
-    
-    
+
     .then(res => {
-      if (!res.ok) {
+      /*console.log('First then is called in patch request in app.ks')*/
+      console.log(res)
+      if(!res.ok) {
         return res.json().then(e => Promise.reject(e))
       }
-      return res.json();
-    })
 
-    .then(data => {
-
-      this.setState( prevState => ({
-        monsterStats: {
-          ...prevState.monsterStats,
-          monster_id: data.id
-      }}))      
-    })
-
-    .then(() => {
       const monsterMoves = this.state.monsterMoves;
-      
+
       this.saveMoves(monsterMoves)
+      
+      return res.json()
     })
 
     .catch(error => {
@@ -354,11 +441,12 @@ class App extends Component {
   //  Grabs monster id then uses theid as part of the move post request
   //along with the other info from the form
   saveMoves = monsterMoves => {
-    
+    console.log('monsterMoves is called')
     monsterMoves.forEach((info) => {
       info['monster_id'] = this.state.monsterStats.monster_id;
-      fetch(`${config.API_ENDPOINT}/api/monsterMoves`, {
-        method: 'POST',
+
+      fetch(`${config.API_ENDPOINT}/api/monsterMoves/${info.monster_id}`, {
+        method: 'PATCH',
         body: JSON.stringify(info),
         headers: {
           'content-type': 'application/json'
@@ -369,6 +457,7 @@ class App extends Component {
         if (!res.ok) {
           return res.json().then(e => Promise.reject(e))
         }
+        console.log(res.json())
         return res.json();
       })
 
@@ -386,7 +475,7 @@ class App extends Component {
     this.setState(prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
-        monster_id: savedMonsterStats.id
+        monster_id: parseInt(savedMonsterStats.id)
     }}))
 
     this.setState(prevState => ({
@@ -410,31 +499,31 @@ class App extends Component {
     this.setState(prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
-        mAtk: savedMonsterStats.attackbonus
+        mAtk: parseInt(savedMonsterStats.attackbonus)
     }}))
 
     this.setState(prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
-        mSaveDc: savedMonsterStats.saveDc
+        mSaveDc: parseInt(savedMonsterStats.saveDc)
     }}))
 
     this.setState(prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
-        mProf: savedMonsterStats.proficiencybonus
+        mProf: parseInt(savedMonsterStats.proficiencybonus)
     }}))
 
     this.setState(prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
-        mArmor: savedMonsterStats.armorclass
+        mArmor: parseInt(savedMonsterStats.armorclass)
     }}))
 
     this.setState(prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
-        mHp: savedMonsterStats.hitpoints
+        mHp: parseInt(savedMonsterStats.hitpoints)
     }}))
 
     this.setState(prevState => ({
@@ -446,73 +535,37 @@ class App extends Component {
     this.setState(prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
-        mStr: savedMonsterStats.strength
+        mStr: parseInt(savedMonsterStats.strength)
     }}))
 
     this.setState(prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
-        mStrSave: savedMonsterStats.strengthsave
+        mDex: parseInt(savedMonsterStats.dexterity)
     }}))
 
     this.setState(prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
-        mDex: savedMonsterStats.dexterity
+        mCon: parseInt(savedMonsterStats.constitution)
     }}))
 
     this.setState(prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
-        mDexSave: savedMonsterStats.dexteritysave
+        mInt: parseInt(savedMonsterStats.inteligence)
     }}))
 
     this.setState(prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
-        mCon: savedMonsterStats.constitution
+        mWis: parseInt(savedMonsterStats.wisdom)
     }}))
 
     this.setState(prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
-        mConSave: savedMonsterStats.constitutionsave
-    }}))
-
-    this.setState(prevState => ({
-      monsterStats: {
-        ...prevState.monsterStats,
-        mInt: savedMonsterStats.inteligence
-    }}))
-
-    this.setState(prevState => ({
-      monsterStats: {
-        ...prevState.monsterStats,
-        mIntSave: savedMonsterStats.inteligencesave
-    }}))
-
-    this.setState(prevState => ({
-      monsterStats: {
-        ...prevState.monsterStats,
-        mWis: savedMonsterStats.wisdom
-    }}))
-
-    this.setState(prevState => ({
-      monsterStats: {
-        ...prevState.monsterStats,
-        mWisSave: savedMonsterStats.wisdomsave
-    }}))
-
-    this.setState(prevState => ({
-      monsterStats: {
-        ...prevState.monsterStats,
-        mCha: savedMonsterStats.charisma
-    }}))
-
-    this.setState(prevState => ({
-      monsterStats: {
-        ...prevState.monsterStats,
-        mChaSave: savedMonsterStats.charismasave
+        mCha: parseInt(savedMonsterStats.charisma)
     }}))
 
     this.setState(prevState => ({
@@ -550,7 +603,7 @@ class App extends Component {
         ...prevState.monsterStats,
         mEnotes: savedMonsterStats.notes
     }}))
-
+    
     this.loadSavedMonsterMoves(savedMonsterStats)
   }
 
@@ -639,6 +692,9 @@ class App extends Component {
 
     return (
         <main className='App'>
+          <LoginBar newUserCreation={this.newUserCreation}
+          userLogin={this.userLogin}
+          />
 
           <CombatRatingSuggestion
             updateMonsterStartingPoint={this.updateMonsterStartingPoint}

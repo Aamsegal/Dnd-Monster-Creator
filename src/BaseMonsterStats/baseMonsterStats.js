@@ -11,6 +11,7 @@ class BaseMonsterStats extends Component {
         mArmor: 0,
         mHp: 0,
         mSpeed: '',
+        mProf: 0,
         mStr: 10,
         mDex: 10,
         mCon: 10,
@@ -33,12 +34,12 @@ class BaseMonsterStats extends Component {
 
     handleMovesSubmit = e => {
         e.preventDefault()
-        const monster_id = uuidv4();
+        const moves_id = uuidv4();
         const action_name = document.getElementById("action_name").value;
         const action_type = document.getElementById("action_type").value;
         const action_details = document.getElementById("action_details").value;
         const damage_dice = document.getElementById("damage_dice").value;
-        const full_action = {id: monster_id, action_name: action_name, style: action_type, action_details: action_details,
+        const full_action = {id: moves_id, action_name: action_name, style: action_type, action_details: action_details,
             damage_dice: damage_dice};
         this.props.addMonsterAttack(full_action)
     }

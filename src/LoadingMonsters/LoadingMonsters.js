@@ -11,7 +11,7 @@ class LoadingMonsters extends Component {
 
     selectMonster = e => {
         e.preventDefault()
-        const monsterList = this.state.monsters
+        const monsterList = this.props.monsters
         const selectedMonsterid = parseInt(document.getElementById('monsterListImport').value);
         let selectedMonster = []
 
@@ -45,7 +45,7 @@ class LoadingMonsters extends Component {
 
     deleteMonster = e => {
         e.preventDefault()
-        const currentMonsterId = parseInt(document.getElementById('monsterListImport').value)
+        const currentMonsterId = document.getElementById('monsterListImport').value;
         let currentMonsterName = '';
 
         this.props.monsters.forEach((monster) => {
