@@ -7,8 +7,6 @@ import LoadingMonsters from './LoadingMonsters/LoadingMonsters'
 import LoginBar from './loginBar/loginBar'
 import { v4 as uuidv4 } from 'uuid';
 import config from './config';
-//import movesRouter from '../../dnd-monster-creator-server/monsterMoves/monsterMoves-router';
-//import DndContext from './DndContenxt';
 
 class App extends Component {
   state = {
