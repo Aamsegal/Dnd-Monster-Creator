@@ -6,7 +6,7 @@ class ActionList extends Component {
         return (
             <div id="monsterMovesContainer" className="monsterMovesContainer">
                 {this.props.monsterMoves.map( action => 
-                    <span id={action.action_name}>
+                    <span id={action.action_name} key={action.id}>
                         <p>{action.action_name}</p>
                         <p>{action.action_type}</p>
                         <p>{action.action_details}</p>

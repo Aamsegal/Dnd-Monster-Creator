@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
 import './loginBar.css';
 
 
@@ -21,16 +22,7 @@ class LoginBar extends Component {
         
         return (
             <div className="loginForm">
-                {/*<form onSubmit={this.loginRequest}>
-
-                    <label htmlFor="username">Username</label>
-                    <input type="text" id="username" name="username"></input>
-
-                    <label htmlFor="userid">User Id</label>
-                    <input type="text" id="userid" name="userid"></input>
-                    
-                    <button>Login</button>
-                </form>*/}
+                <button><Link to='/'>Homepage</Link></button>
                 <button onClick={() => this.createNewUser()}>New User</button>
                 <button onClick={() => this.loginRequest()}>Login</button>
             </div>

@@ -9,22 +9,21 @@ import { v4 as uuidv4 } from 'uuid';
 import config from './config';
 //import movesRouter from '../../dnd-monster-creator-server/monsterMoves/monsterMoves-router';
 //import DndContext from './DndContenxt';
-var temp = 0;
 
 class App extends Component {
   state = {
     monsterStats: {
-      user_id: 1,
+      user_id: 0,
       monster_id: 0,
-      mName: 'Test Name',
-      mType: 'Test id',
+      mName: '',
+      mType: '',
       mCr: '0',
       mAtk: 0,
       mSaveDc: 0,
       mProf: 0,
       mArmor: 10,
       mHp: 0,
-      mSpeed: 0,
+      mSpeed: '',
       mStr: 10,
       mDex: 10,
       mCon: 10,
@@ -85,8 +84,6 @@ class App extends Component {
     })
 
     .then(res => {
-      /*console.log('First then is called in patch request in app.ks')*/
-      console.log(res)
       if(!res.ok) {
         return res.json().then(e => Promise.reject(e))
       }
@@ -164,147 +161,152 @@ class App extends Component {
     })
 
     .then(monsters => {
-      console.log(monsters)
       this.setState({monsters})
     })
   }
 
-  //  Updates the state of all the values sent up from baseMonsterStats
-  updateMonsterStats = monsterValues => {
-    if(this.state.monsterStats.monster_id === 0) {
-      let uniqueMonsterId = uuidv4();
-
-      this.setState(prevState => ({
-        monsterStats: {
-          ...prevState.monsterStats,
-          monster_id: uniqueMonsterId
-      }}))
-    }
-    
-    this.setState(prevState => ({
-      monsterStats: {
-        ...prevState.monsterStats,
-        mName: monsterValues.mName
-    }}))
-
-    this.setState(prevState => ({
-      monsterStats: {
-        ...prevState.monsterStats,
-        mCr: monsterValues.mCr
-    }}))
-
-    this.setState(prevState => ({
-      monsterStats: {
-        ...prevState.monsterStats,
-        mProf: monsterValues.mProf
-    }}))
-
-    this.setState(prevState => ({
-      monsterStats: {
-        ...prevState.monsterStats,
-        mAtk: monsterValues.mAtk
-    }}))
-
-    this.setState(prevState => ({
-      monsterStats: {
-        ...prevState.monsterStats,
-        mSaveDc: monsterValues.mSaveDc
-    }}))
-
-    this.setState( prevState => ({
-      monsterStats: {
-        ...prevState.monsterStats,
-        mType: monsterValues.mType
-    }}))
-
-    this.setState( prevState => ({
-      monsterStats: {
-        ...prevState.monsterStats,
-        mArmor: monsterValues.mArmor
-    }}))
-
-    this.setState( prevState => ({
-      monsterStats: {
-        ...prevState.monsterStats,
-        mHp: monsterValues.mHp
-    }}))
-
-    this.setState( prevState => ({
-      monsterStats: {
-        ...prevState.monsterStats,
-        mSpeed: monsterValues.mSpeed
-    }}))
+  //  sets the state = to the base monster. Mainly resetting the monster id so when the user saves
+  //their monster it will do a post request instead of a patch
+  createNewMonster = () => {
     
     this.setState( prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
-        mStr: monsterValues.mStr
+        monster_id: 0
+    }}))
+
+    this.setState( prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mName: ''
+    }}))
+
+    this.setState( prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mType: ''
+    }}))
+
+    this.setState( prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mCr: '0'
+    }}))
+
+    this.setState( prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mAtk: 0
+    }}))
+
+    this.setState( prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mSaveDc: 0
+    }}))
+
+    this.setState( prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mProf: 0
+    }}))
+
+    this.setState( prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mArmor: 10
+    }}))
+
+    this.setState( prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mHp: 0
+    }}))
+
+    this.setState( prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mSpeed: 0
+    }}))
+
+    this.setState( prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mStr: 10
+    }}))
+
+    this.setState( prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mDex: 10
+    }}))
+
+    this.setState( prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mCon: 10
+    }}))
+
+    this.setState( prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mInt: 10
+    }}))
+
+    this.setState( prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mWis: 10
+    }}))
+
+    this.setState( prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mCha: 10
+    }}))
+
+    this.setState( prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mVul: ''
+    }}))
+
+    this.setState( prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mRes: ''
+    }}))
+
+    this.setState( prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mImmune: ''
+    }}))
+
+    this.setState( prevState => ({
+      monsterStats: {
+        ...prevState.monsterStats,
+        mSenses: ''
     }}))
     
     this.setState( prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
-        mDex: monsterValues.mDex
-    }}))
-    
-    this.setState( prevState => ({
-      monsterStats: {
-        ...prevState.monsterStats,
-        mCon: monsterValues.mCon
-    }}))
-    
-    this.setState( prevState => ({
-      monsterStats: {
-        ...prevState.monsterStats,
-        mInt: monsterValues.mInt
-    }}))
-    
-    this.setState( prevState => ({
-      monsterStats: {
-        ...prevState.monsterStats,
-        mWis: monsterValues.mWis
-    }}))
-    
-    this.setState( prevState => ({
-      monsterStats: {
-        ...prevState.monsterStats,
-        mCha: monsterValues.mCha
+        mLanguage: ''
     }}))
 
     this.setState( prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
-        mVuln: monsterValues.mVuln
+        mEnotes: ''
     }}))
+  }
 
+  updateMonsterStats = (key, value) => {
     this.setState( prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
-        mRes: monsterValues.mRes
-    }}))
-
-    this.setState( prevState => ({
-      monsterStats: {
-        ...prevState.monsterStats,
-        mImmune: monsterValues.mImmune
-    }}))
-
-    this.setState( prevState => ({
-      monsterStats: {
-        ...prevState.monsterStats,
-        mSenses: monsterValues.mSenses
-    }}))
-
-    this.setState( prevState => ({
-      monsterStats: {
-        ...prevState.monsterStats,
-        mLanguage: monsterValues.mLanguage
-    }}))
-
-    this.setState( prevState => ({
-      monsterStats: {
-        ...prevState.monsterStats,
-        mEnotes: monsterValues.mEnotes
+        [key]: value
     }}))
   }
 
@@ -420,8 +422,6 @@ class App extends Component {
     })
 
     .then(res => {
-      /*console.log('First then is called in patch request in app.ks')*/
-      console.log(res)
       if(!res.ok) {
         return res.json().then(e => Promise.reject(e))
       }
@@ -441,7 +441,6 @@ class App extends Component {
   //  Grabs monster id then uses theid as part of the move post request
   //along with the other info from the form
   saveMoves = monsterMoves => {
-    console.log('monsterMoves is called')
     monsterMoves.forEach((info) => {
       info['monster_id'] = this.state.monsterStats.monster_id;
 
@@ -457,7 +456,6 @@ class App extends Component {
         if (!res.ok) {
           return res.json().then(e => Promise.reject(e))
         }
-        console.log(res.json())
         return res.json();
       })
 
@@ -505,7 +503,7 @@ class App extends Component {
     this.setState(prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
-        mSaveDc: parseInt(savedMonsterStats.saveDc)
+        mSaveDc: parseInt(savedMonsterStats.savedc)
     }}))
 
     this.setState(prevState => ({
@@ -706,11 +704,13 @@ class App extends Component {
             loadSavedMonsters={this.loadSavedMonsters}
             monsters={this.state.monsters}
             loadSavedMonsterStats={this.loadSavedMonsterStats}
+            createNewMonster={this.createNewMonster}
             deleteMonster={this.deleteMonster}
           />
           
           <BaseMonsterStats 
-            updateMonsterStats={this.updateMonsterStats} 
+            updateMonsterStats={this.updateMonsterStats}
+            monsterStats={this.state.monsterStats}
             addMonsterAttack={this.addMonsterAttack}
           />
 

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './LoadingMonsters.css';
-import config from '../config'
 
 class LoadingMonsters extends Component {
     state = {
@@ -12,7 +11,7 @@ class LoadingMonsters extends Component {
     selectMonster = e => {
         e.preventDefault()
         const monsterList = this.props.monsters
-        const selectedMonsterid = parseInt(document.getElementById('monsterListImport').value);
+        const selectedMonsterid = document.getElementById('monsterListImport').value;
         let selectedMonster = []
 
         for (let i=0; i < monsterList.length; i++) {
@@ -22,26 +21,6 @@ class LoadingMonsters extends Component {
         }
         this.props.loadSavedMonsterStats(selectedMonster)
     }
-
-    /*reloadMonsters = e => {
-        e.preventDefault()
-        Promise.all([
-            fetch(`${config.API_ENDPOINT}/api/monsters/userId/${this.props.userId}`)
-        ])
-            .then(([monsterRes]) => {
-                if(!monsterRes.ok)
-                    return monsterRes.json().then(e => Promise.reject(e));
-                return Promise.all([monsterRes.json()])
-            })
-
-            .then(([monsters]) => {
-                this.props.loadSavedMonsters(monsters)
-            })
-
-            .catch(error => {
-                console.error({error})
-            })
-    }*/
 
     deleteMonster = e => {
         e.preventDefault()
@@ -54,9 +33,14 @@ class LoadingMonsters extends Component {
             }
         })
 
-        if (window.confirm(`Are you sure you want to delete ${currentMonsterName}`) == true) {
+        if (window.confirm(`Are you sure you want to delete ${currentMonsterName}`) === true) {
             this.props.deleteMonster(currentMonsterId)
         } 
+    }
+
+    createNewMonster = e => {
+        e.preventDefault()
+        this.props.createNewMonster()
     }
 
     render() {
@@ -69,8 +53,8 @@ class LoadingMonsters extends Component {
                     )}
                 </select>
                 <button name='selectMonsterButton' id='selectMonsterButton' onClick={this.selectMonster}>Select</button>
-                {/*<button name='reloadMonstersButton' id='reloadMonstersButton' onClick={this.reloadMonsters}>Load Monsters</button>*/}
                 <button name='deleteMonsterButton' id="deleteMonsterButton" onClick={this.deleteMonster}>Delete Monster</button>
+                <button name='createNewMonsterButton' id="createNewMonsterButton" onClick={this.createNewMonster}>Create New Monster</button>
             </div>
             
         )
