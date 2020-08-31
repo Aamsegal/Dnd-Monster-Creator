@@ -65,6 +65,7 @@ class App extends Component {
         })
 
         .catch(error => {
+          console.log('1')
           console.error({error})
         })
   }
@@ -96,6 +97,7 @@ class App extends Component {
     })
 
     .catch(error => {
+      console.log('2')
       console.error({error})
     })
   }
@@ -137,6 +139,7 @@ class App extends Component {
     })
 
     .catch(error => {
+      console.log('3')
       console.error({error})
     })
   }
@@ -357,12 +360,29 @@ class App extends Component {
 
   }
 
+  newMonsterId = () => {
+    let currentId = this.state.monsterStats.monster_id;
+
+    if (currentId === 0) {
+      currentId = uuidv4();
+
+      this.setState( prevState => ({
+        monsterStats: {
+          ...prevState.monsterStats,
+          monster_id: currentId
+      }}))
+      
+    }
+
+    return currentId;
+
+  }
   //  Uses the state to update the monster info
   //if an error returns saying the monster already exists it creates the monster
   //running saveNewMonster function
   saveMonster = monsterInfo => {
     let user_id = monsterInfo.user_id;
-    let monster_id = monsterInfo.monster_id;
+    let monster_id = this.newMonsterId();
     let monster_name = monsterInfo.mName;
     let monster_type = monsterInfo.mType;
     let challenge_rating = monsterInfo.mCr;
@@ -432,6 +452,7 @@ class App extends Component {
     })
 
     .catch(error => {
+      window.alert(error.error.message)
       console.error({error})
     })
   }
@@ -458,6 +479,7 @@ class App extends Component {
       })
 
       .catch(error => {
+        console.log('5')
         console.error({error})
       })
     })
@@ -649,8 +671,12 @@ class App extends Component {
           return res.json
         })
 
-        .catch(error =>
-          console.error({error}))
+        .catch(error => {
+          console.log('6')
+          console.error({error})
+        })
+          
+          
       }
     })
   }
@@ -678,6 +704,7 @@ class App extends Component {
         })
 
         .catch(error => {
+          console.log('7')
           console.error({error})
         })
       }
