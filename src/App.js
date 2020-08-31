@@ -65,8 +65,8 @@ class App extends Component {
         })
 
         .catch(error => {
-          console.log('1')
-          console.error({error})
+          /*console.log('1')
+          console.error({error})*/
         })
   }
 
@@ -97,8 +97,8 @@ class App extends Component {
     })
 
     .catch(error => {
-      console.log('2')
-      console.error({error})
+      /*console.log('2')
+      console.error({error})*/
     })
   }
 
@@ -139,8 +139,8 @@ class App extends Component {
     })
 
     .catch(error => {
-      console.log('3')
-      console.error({error})
+      /*console.log('3')
+      console.error({error})*/
     })
   }
 
@@ -479,8 +479,8 @@ class App extends Component {
       })
 
       .catch(error => {
-        console.log('5')
-        console.error({error})
+        /*console.log('5')
+        console.error({error})*/
       })
     })
   }
@@ -672,8 +672,8 @@ class App extends Component {
         })
 
         .catch(error => {
-          console.log('6')
-          console.error({error})
+          /*console.log('6')
+          console.error({error})*/
         })
           
           
@@ -704,8 +704,8 @@ class App extends Component {
         })
 
         .catch(error => {
-          console.log('7')
-          console.error({error})
+          /*console.log('7')
+          console.error({error})*/
         })
       }
     })
