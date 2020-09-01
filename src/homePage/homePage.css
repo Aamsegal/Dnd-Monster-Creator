@@ -1,0 +1,93 @@
+.introductionContainer {
+    width: 100%;
+    }
+
+.introduction {
+    text-align: center;
+    vertical-align: middle;
+    align-self: center;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    color: #FFFFFF;
+    
+    }
+
+a, a:visited, a:hover, a:active {
+        color: inherit;
+        text-decoration: none;
+    }
+
+@media screen and (max-width: 800px) {
+    .introduction {
+        padding-top: 20%;
+    }
+
+    p {
+        margin-bottom: 20px
+    }
+
+    button {
+        background-color: #FFFFFF;
+        color: #22252A;
+    }
+
+    #introduction button {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    #moreInfoPopup {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: 22252A; /* Black w/ opacity */
+    }
+
+    #moreInfoPopup-Content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 70%;
+      }
+
+    #moreInfoPopup-Content p {
+        font-size: 20px;
+    }
+
+    #close-Button-div {
+        text-align: center;
+    }
+
+    #close-Button-div button {
+        width: 100px;
+        height: 30px;
+        font-size: 15px;
+        font-weight: bold;
+    }
+    
+    
+    
+}
+
+@media screen and (min-width: 800px) {
+
+    .introduction{
+        margin-top: 10%;
+    }
+
+    h1 {
+        font-size: 50px;
+    }
+}
+
+h1 {
+    padding-top: 0;
+}
