@@ -71,8 +71,8 @@ class App extends Component {
   }
 
   //  creates a new user in the database and returns the id
-  newUserCreation = username => {
-    let newUserInfo = {id: uuidv4(), username: username}
+  newUserCreation = (username, password) => {
+    let newUserInfo = {username: username, password: password}
     
     fetch(`${config.API_ENDPOINT}/api/users`, {
       method: 'POST',
@@ -91,9 +91,8 @@ class App extends Component {
     })
 
     .then(data => {
-      window.alert(`Please save this value for login 
+      window.alert(`You have succesfully created an account. Enjoy!`)
       
-      ${data.id}`)
     })
 
     .catch(error => {
@@ -103,8 +102,8 @@ class App extends Component {
   }
 
   userLogin = userLoginInfo => {
-    let loginId = userLoginInfo.id
     let loginUsername = userLoginInfo.username
+    let loginId = userLoginInfo.password
 
     fetch(`${config.API_ENDPOINT}/api/users/${loginId}/${loginUsername}`, {
       method: 'GET',
@@ -123,7 +122,7 @@ class App extends Component {
 
     .then(data => {
       if(data.length === 0) {
-        window.alert('Your login crudentials were wrong');
+        window.alert('There is no user with that username and password. Try again.');
       } else {
         window.alert(`You have logged into ${data[0].username}`)
 
@@ -405,6 +404,11 @@ class App extends Component {
     let	creature_language	= monsterInfo.mLanguage;
     let notes = monsterInfo.mEnotes;
     
+    if(user_id === 0) {
+      window.alert('You need to be logged in to save a monster.')
+      return
+    }
+
     const newMonster = {
       user_id: user_id,
       id: monster_id,

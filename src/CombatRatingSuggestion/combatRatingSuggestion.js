@@ -64,20 +64,22 @@ import {v4 as uuidv4 } from 'uuid';
 
     monsterBaseStatsRender() {
         if(this.state.combatRating === "") {
-            return (
+            return /*(
                 <p>Choose a monster level</p>
-            )
+            )*/
         } else {
             return (
-                <div>
-                    <p>Combat Rating {this.state.combatRating} suggetions</p>
-                    <ul>
-                        <li>Armor Class {this.state.armorClassSuggestion}</li>
-                        <li>Hit Points {this.state.hitPointsSuggestion}</li>
-                        <li>Attack Bonus {this.state.attackBonusSuggestion}</li>
-                        <li>Damage per round {this.state.damagePerRoundSuggestion}</li>
-                        <li>Save dice check {this.state.saveDcSuggestion}</li>
-                    </ul>
+                <div id = "combatRatingSuggestionResultsContainer">
+                    <div id = "combatRatingSuggestionResults">
+                        <p>Combat Rating {this.state.combatRating} suggetions</p>
+                        <ul>
+                            <li>Armor Class {this.state.armorClassSuggestion}</li>
+                            <li>Hit Points {this.state.hitPointsSuggestion}</li>
+                            <li>Attack Bonus {this.state.attackBonusSuggestion}</li>
+                            <li>Damage per round {this.state.damagePerRoundSuggestion}</li>
+                            <li>Save dice check {this.state.saveDcSuggestion}</li>
+                        </ul>
+                    </div>
                 </div>
                 
             )
@@ -89,19 +91,21 @@ import {v4 as uuidv4 } from 'uuid';
     render() {
 
         return(
-            <form onSubmit = {this.handleSubmit}>
-                <label htlmfor="combatRatingSelection">Select a combat raiting</label>
-                <select name="combatRatingSelection" id="combatRatingSelection">
-                    {this.props.startingValues.map( cr => 
-                        <option
-                            value = {cr.combat_rating}
-                            key = {this.generateUuid()}
-                        >{cr.combat_rating}</option>
-                    )}
-                </select>
-                <button>Submit</button>
-                <h1>{this.monsterBaseStatsRender()}</h1>
-            </form>
+            <div id = "combatRatingSelectionContainer">            
+                <form id="combatRatingSelectionForm" onSubmit = {this.handleSubmit}>
+                    <label htlmfor="combatRatingSelection" id="combatRatingSelectionLabel">Select a combat raiting</label>
+                    <select name="combatRatingSelection" id="combatRatingSelection">
+                        {this.props.startingValues.map( cr => 
+                            <option
+                                value = {cr.combat_rating}
+                                key = {this.generateUuid()}
+                            >{cr.combat_rating}</option>
+                        )}
+                    </select>
+                    <button>Submit</button>
+                    <h1>{this.monsterBaseStatsRender()}</h1>
+                </form>
+            </div>
         )
             
 

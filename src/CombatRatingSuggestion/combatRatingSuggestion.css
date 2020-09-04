@@ -1,10 +1,11 @@
-form {
+#combatRatingSelectionForm {
     text-align: center;
 }
 
 p {
     font-size: 24px;
     margin-bottom: 0px;
+    text-decoration: underline;
 }
 
 
@@ -13,12 +14,109 @@ ul {
     margin-bottom: auto;
     margin-top: auto;
     vertical-align: auto;
+    text-align: left;
+    
 }
 
 
-li {
-    display: inline;
+#combatRatingSuggestionResults li {
+    list-style-type: none;
+    text-decoration: none;
     font-size: 16px;
     padding: 5px;
-    
+}
+
+#combatRatingSuggestionResultsContainer {
+    margin:auto; /*Centers the box*/
+}
+
+#combatRatingSuggestionResults {
+    border: 2px solid white; /*Adds a border to*/
+}
+
+#combatRatingSuggestionResultsContainer ul {
+    padding: 0;
+}
+
+/*Css for when the view page is smaller or equal to 800px*/
+@media screen and (max-width: 800px) {
+    #combatRatingSelectionContainer {
+        height: 60px;
+        border-bottom: 3px solid #929292;
+        padding-top: 50px;
+        margin-left: 20px;
+        margin-right: 20px;
+        
+    }
+
+    #combatRatingSuggestionResultsContainer {
+        width: 90%; /*Sets max with to be 90% of the page*/
+    }
+
+    #combatRatingSelectionLabel {
+        margin: 2.5px;
+    }
+
+    #combatRatingSelection {
+        width: 170px;
+        margin: 2.5px;
+    }
+
+    #combatRatingSelectionForm button {
+        margin: 2.5px;
+    }
+
+    #combatRatingSuggestionResults p {
+        margin-top: 10px;
+    }
+
+    #combatRatingSuggestionResults p {
+        font-size: 22px;
+    }
+
+    #combatRatingSuggestionResults li {
+        font-size: 15px;
+    }
+}
+
+/*Css for when the view page is larger than 800px*/
+@media screen and (min-width: 801px) {
+    form {
+        padding-top: 100px;
+    }
+
+    #combatRatingSuggestionResultsContainer {
+        width: 42%; /*Sets max with to be 90% of the page*/
+    }
+
+    #combatRatingSelectionLabel {
+        margin: 2.5px;
+    }
+
+    #combatRatingSelection {
+        width: 170px;
+        margin: 2.5px;
+    }
+
+    #combatRatingSelectionForm button {
+        margin: 2.5px;
+    }
+
+    #combatRatingSuggestionResults p {
+        margin-top: 10px;
+        font-size: 22px;
+    }
+
+    #combatRatingSuggestionResults ul {
+        /*margin-left: 5px;
+        margin-right: 5px;
+        padding-left: 20px;
+        padding-right: 20px;*/
+        text-align: center;
+    }
+
+    #combatRatingSuggestionResults li {
+        display: inline-block;
+        /*font-size: 20px;*/
+    }
 }

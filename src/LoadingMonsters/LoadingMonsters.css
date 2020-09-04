@@ -1,0 +1,51 @@
+#loadingMonsters {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+@media screen and (max-width: 800px) {
+    #loadingMonsters {
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    #monsterListImportLabel {
+        display: block;
+        text-align: center;
+    }
+
+    #monsterSelection {
+        text-align: center;
+    }
+
+    #monsterListImport {
+        width: 180px;
+        margin-right: 20px;
+        text-align: center;
+    }
+
+    #selectMonsterButton {
+        width: 80px;
+        height: 20px;
+    }
+
+    #deleteMonsterButton, #createNewMonsterButton {
+        width: 80px;
+        height: 20px;
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    #createNewMonsterButton {
+    
+    }
+        
+}
+
+@media screen and (min-width: 801px) {
+    #loadingMonsterPhoneBreak {
+        display: none;
+    }
+}

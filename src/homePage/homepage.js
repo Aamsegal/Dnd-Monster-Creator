@@ -4,6 +4,7 @@ import './homepage.css'
 
 class Homepage extends Component {
 
+
     moreInfoButton() {
         document.getElementById('moreInfoPopup').style.display = "block";
     }
@@ -11,6 +12,7 @@ class Homepage extends Component {
     closeMoreInfo() {
         document.getElementById('moreInfoPopup').style.display = "none"
     }
+
 
     render() {
 
@@ -36,7 +38,7 @@ class Homepage extends Component {
                         
                     </div>
                 </div>
-                    
+
             </header>
             
         )
