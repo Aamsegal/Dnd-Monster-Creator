@@ -72,7 +72,7 @@ class App extends Component {
 
   //  creates a new user in the database and returns the id
   newUserCreation = (username, password) => {
-    let newUserInfo = {username: username, password: password}
+    let newUserInfo = {username: username, userpass: password}
     
     fetch(`${config.API_ENDPOINT}/api/users`, {
       method: 'POST',
@@ -103,9 +103,9 @@ class App extends Component {
 
   userLogin = userLoginInfo => {
     let loginUsername = userLoginInfo.username
-    let loginId = userLoginInfo.password
+    let loginUserpass = userLoginInfo.password
 
-    fetch(`${config.API_ENDPOINT}/api/users/${loginId}/${loginUsername}`, {
+    fetch(`${config.API_ENDPOINT}/api/users/${loginUsername}/${loginUserpass}`, {
       method: 'GET',
       headers: {
         'content-type': 'application/json'

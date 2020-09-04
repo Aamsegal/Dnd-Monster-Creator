@@ -21,7 +21,7 @@ class LoginBar extends Component {
             return
         }
 
-        let hashedPassword = CryptoJS.MD5(password);
+        let hashedPassword = CryptoJS.MD5(password).toString();
 
         let userLoginInfo = {username: username, password: hashedPassword}      
 
@@ -43,7 +43,7 @@ class LoginBar extends Component {
             return
         }
 
-        let hashedPassword = CryptoJS.MD5(password);
+        let hashedPassword = CryptoJS.MD5(password).toString();
 
         this.props.newUserCreation(username, hashedPassword)
     }
