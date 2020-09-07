@@ -2,10 +2,10 @@
     outline: 1px solid black;
     background-color: #aaa;
     height: 400px;
-    margin-bottom: 10%;
+    margin: 0;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 800px) {
     .baseMonsterInfo {
         margin-left: 10%; 
         margin-right: 10%
@@ -13,12 +13,11 @@
     
 }
 
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 801px) {
     .baseMonsterInfo {
         display: inline-block;
-        height: 600px;
-        width: 35%;
-        margin: 7.5%;
+        width: 35%
+        
     }
     
 }

@@ -47,16 +47,17 @@ class LoadingMonsters extends Component {
         return(
             <div className = 'loadingMonsters' id = "loadingMonsters">
                 <div id = "monsterSelection">
-                    <label htlmfor="monsterListImport" id = "monsterListImportLabel">Load one of our saved monsters.</label>
-                    <select name='monsterListImport' id='monsterListImport'>
-                    {this.props.monsters.map( monster => 
-                        <option value={monster.id} key={`monster_${monster.id}`}>{monster.monster_name}</option>
-                    )}
-                    </select>
+                    <label htlmfor="monsterListImport" id = "monsterListImportLabel">Load one of your saved monsters.</label>
                     <button name='selectMonsterButton' id='selectMonsterButton' onClick={this.selectMonster}>Select</button>
+                    <button name='deleteMonsterButton' id="deleteMonsterButton" onClick={this.deleteMonster}>Delete</button>
+                    <button name='createNewMonsterButton' id="createNewMonsterButton" onClick={this.createNewMonster}>New</button>
+                    <select name='monsterListImport' id='monsterListImport'>
+                        {this.props.monsters.map( monster => 
+                            <option value={monster.id} key={`monster_${monster.id}`}>{monster.monster_name}</option>
+                        )}
+                    </select>
                 </div>
-                <button name='deleteMonsterButton' id="deleteMonsterButton" onClick={this.deleteMonster}>Delete</button>
-                <button name='createNewMonsterButton' id="createNewMonsterButton" onClick={this.createNewMonster}>New</button>
+                
             </div>
             
         )

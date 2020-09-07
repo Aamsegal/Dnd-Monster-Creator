@@ -25,7 +25,6 @@
 
 @media screen and (min-width: 801px) {
     #loginForm {
-        text-align: left;
         padding-top: 20px;
         padding-bottom: 20px;
     }
@@ -37,4 +36,23 @@
         padding: 10px;
         font-weight: bold;
     }
+
+    
+    #loginButtons {
+        text-align: left;
+        width: 45%;
+    }
+
+    #currentUsername {
+        display: inline;
+        text-align: right;
+    }
+
+    #loginForm p {
+        display: inline;
+        margin-left: auto;
+        margin-right: auto;
+        color: black;
+    }
+
 }

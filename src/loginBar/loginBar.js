@@ -71,15 +71,32 @@ class LoginBar extends Component {
 
         return password
     }
+
+    loggedInUser = () => {
+        const loggedInUsername = this.props.username;
+        if (loggedInUsername === '') {
+            return <p>No user</p>
+        } else {
+        return <p>Current User: {loggedInUsername}</p>
+        }
+    }
       
 
     render() {
         
         return (
             <div className="loginForm" id="loginForm">
-                <button><Link to='/'>Homepage</Link></button>
-                <button onClick={() => this.createNewUser()}>New User</button>
-                <button onClick={() => this.loginRequest()}>Login</button>
+                <div id = "loginButtons">
+                    <button><Link to='/'>Homepage</Link></button>
+                    <button onClick={() => this.createNewUser()}>New User</button>
+                    <button onClick={() => this.loginRequest()}>Login</button>
+                    {this.loggedInUser()}
+                </div>
+                
+                <div id = "currentUsername">
+                    
+                </div>
+                
             </div>
             
         )

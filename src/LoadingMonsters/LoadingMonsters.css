@@ -37,10 +37,6 @@
         margin-top: 10px;
         margin-bottom: 20px;
     }
-
-    #createNewMonsterButton {
-    
-    }
         
 }
 
@@ -48,4 +44,25 @@
     #loadingMonsterPhoneBreak {
         display: none;
     }
+
+    #loadingMonsters {
+        text-align: center;
+    }
+
+    #monsterSelection button {
+        margin: 10px;
+        width: 60px;
+    }
+
+    #monsterListImport {
+        margin-left: auto;
+        margin-right: auto;
+        width: 350px;
+    }
+
+    #monsterListImportLabel, #monsterListImport {
+        display: block;
+    }
+
+
 }

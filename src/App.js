@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css'
 import BaseMonsterStats from './BaseMonsterStats/baseMonsterStats'
 import MonsterCard from './MonsterCard/MonsterCard'
 import CombatRatingSuggestion from './CombatRatingSuggestion/combatRatingSuggestion'
@@ -7,6 +6,8 @@ import LoadingMonsters from './LoadingMonsters/LoadingMonsters'
 import LoginBar from './loginBar/loginBar'
 import { v4 as uuidv4 } from 'uuid';
 import config from './config';
+
+import './App.css'
 
 class App extends Component {
   state = {
@@ -33,7 +34,8 @@ class App extends Component {
       mImmune: '',
       mSenses: '',
       mLanguage: '',
-      mEnotes: ''
+      mEnotes: '',
+      currentUserName: ''
     },
     startingPoint: [],
     monsters: [],
@@ -130,6 +132,12 @@ class App extends Component {
           monsterStats: {
             ...prevState.monsterStats,
             user_id: data[0].id
+        }}))
+
+        this.setState(prevState => ({
+          monsterStats: {
+            ...prevState.monsterStats,
+            currentUserName: data[0].username
         }}))
 
         let loggedInUserId = data[0].id
@@ -451,13 +459,15 @@ class App extends Component {
       const monsterMoves = this.state.monsterMoves;
 
       this.saveMoves(monsterMoves)
+
+      this.loadMonsterList(user_id)
       
       return res.json()
     })
 
     .catch(error => {
-      window.alert(error.error.message)
-      console.error({error})
+      /*window.alert(error.message)
+      console.error({error})*/
     })
   }
 
@@ -497,7 +507,7 @@ class App extends Component {
     this.setState(prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
-        monster_id: parseInt(savedMonsterStats.id)
+        monster_id: (savedMonsterStats.id)
     }}))
 
     this.setState(prevState => ({
@@ -721,6 +731,7 @@ class App extends Component {
         <main className='App'>
           <LoginBar newUserCreation={this.newUserCreation}
           userLogin={this.userLogin}
+          username = {this.state.monsterStats.currentUserName}
           />
 
           <CombatRatingSuggestion
@@ -737,18 +748,21 @@ class App extends Component {
             deleteMonster={this.deleteMonster}
           />
           
-          <BaseMonsterStats 
+          <div id = "monsterInfoContainer">
+            <BaseMonsterStats 
             updateMonsterStats={this.updateMonsterStats}
             monsterStats={this.state.monsterStats}
             addMonsterAttack={this.addMonsterAttack}
-          />
+            />
 
           <MonsterCard 
             monsterInfo={this.state.monsterStats}
             saveMonsterFunction={this.saveMonster}
             monsterMoves={this.state.monsterMoves}
             deleteMonsterAttack={this.deleteMonsterAttack}
-          />
+            />
+          </div>
+          
 
         </main>
       //</DndContext.Provider>
