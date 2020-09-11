@@ -1,8 +1,12 @@
 .baseMonsterInfo {
     outline: 1px solid black;
     background-color: #aaa;
-    height: 400px;
     margin: 0;
+    vertical-align: top;
+}
+
+#baseStatsForm {
+    background-color: #aaa;
 }
 
 @media screen and (max-width: 800px) {
@@ -13,12 +17,61 @@
     
 }
 
-@media screen and (min-width: 801px) {
+@media screen and (min-width: 801px) and (max-width: 1150px) {
     .baseMonsterInfo {
         display: inline-block;
-        width: 35%
+        width: 45%;
+        margin-left: 10px;
+        margin-right: 10px;        
+    }
+}
+
+@media screen and (min-width: 1151px) {
+    .baseMonsterInfo {
+        display: inline-block;
+        width: 40%;
+        margin-left: 45px;
+        margin-right: 45px;
         
     }
+
+    #baseMonsterInfo button {
+        width: 140px;
+        height: 25px;
+        margin-left: 5px;
+        margin-right: 5px;
+        margin-top: 10px;
+        margin-bottom: 15px;
+        text-decoration: bold;
+    }
+
+    #baseStatsForm {
+        text-align: left;
+    }
+
+    #form {
+        text-align: left;
+        padding: 0;
+    }
+
+    #inputContainer {
+        display: inline-block;
+        text-align: left;
+        width: 40%;
+        margin-left: 30px;
+        padding-bottom: 2px;
+        margin-bottom: 5px;
+        border-bottom: 2px solid black;
+    }
+
+    #inputLabel {
+        display: Block;
+        text-align: left;
+        color: black;
+        font-size: 18px;
+    }
+
+
     
 }
 

@@ -90,11 +90,12 @@ class LoginBar extends Component {
                     <button><Link to='/'>Homepage</Link></button>
                     <button onClick={() => this.createNewUser()}>New User</button>
                     <button onClick={() => this.loginRequest()}>Login</button>
-                    {this.loggedInUser()}
+                    
                 </div>
                 
+                
                 <div id = "currentUsername">
-                    
+                    {this.loggedInUser()}
                 </div>
                 
             </div>

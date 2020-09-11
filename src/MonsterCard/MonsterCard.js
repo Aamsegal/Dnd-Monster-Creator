@@ -18,36 +18,146 @@ class MonsterCard extends Component {
         const chaMod = Math.floor(parseInt((this.props.monsterInfo.mCha)-10)/2)
 
         return (
-            <div className = 'monsterCard'>
-                <ul>
-                    <li>Monster Name: {this.props.monsterInfo.mName}</li>
-                    <li>Monster Type: {this.props.monsterInfo.mType}</li>
-                    <li>Combat Rating: {this.props.monsterInfo.mCr}</li>
-                    <li>Proficiency: {this.props.monsterInfo.mProf}</li>
-                    <li>Attack Bonus: {this.props.monsterInfo.mAtk}</li>
-                    <li>Save Check: {this.props.monsterInfo.mSaveDc}</li>
-                    <li>Armor Class: {this.props.monsterInfo.mArmor}</li>
-                    <li>Hit Points: {this.props.monsterInfo.mHp}</li>
-                    <li>Speed: {this.props.monsterInfo.mSpeed}</li>
-                    <li>Strength: {this.props.monsterInfo.mStr} ({strMod})</li>
-                    <li>Dexterity: {this.props.monsterInfo.mDex} ({dexMod})</li>
-                    <li>Constitution: {this.props.monsterInfo.mCon} ({conMod})</li>
-                    <li>Inteligence: {this.props.monsterInfo.mInt} ({intMod})</li>
-                    <li>Wisdom: {this.props.monsterInfo.mWis} ({wisMod})</li>
-                    <li>Charisma: {this.props.monsterInfo.mCha} ({chaMod})</li>
-                    <li>Vulnerabilities: {this.props.monsterInfo.mVul}</li>
-                    <li>Resistances: {this.props.monsterInfo.mRes}</li>
-                    <li>Immunities: {this.props.monsterInfo.mImmune}</li>
-                    <li>Senses: {this.props.monsterInfo.mSenses}</li>
-                    <li>Languages: {this.props.monsterInfo.mLanguage}</li>
-                    <li>Notes: {this.props.monsterInfo.mEnotes}</li>
-                </ul>
+            <div className="monsterCard">
+
+                    <div className="monsterIdentitycontainer">
+                        <div className="listItemContainer" id="mNameOut">
+                                <p>{this.props.monsterInfo.mName}</p>
+                        </div>
+
+                        <div className="listItemContainer" id="mTypeOut">
+                            <span>Type</span><p>{this.props.monsterInfo.mType}</p>
+                        </div>
+
+                        <div className="listItemContainer" id="cRating">
+                            <span>Combat Rating</span><p>{this.props.monsterInfo.mCr}</p>
+                        </div>
+
+                    </div>
+                    
+                    <div className='coreMonsterStatsContainer'>
+                        <div className="listItemContainer" id="proficienyOut">
+                            <span>Proficiency</span><p>{this.props.monsterInfo.mProf}</p>
+                        </div>
+
+                        <div className="listItemContainer" id="aBonusOut">
+                            <span>Attack Bonus</span><p>{this.props.monsterInfo.mAtk}</p>
+                        </div>
+
+                        <div className="listItemContainer" id="sCheckOut">
+                            <span>Save Check</span><p>{this.props.monsterInfo.mSaveDc}</p>
+                        </div>
+
+                        <div className="listItemContainer" id="aClassOut">
+                            <span>Armor Class</span><p>{this.props.monsterInfo.mArmor}</p>
+                        </div>
+
+                        <div className="listItemContainer" id="hPointsOut">
+                            <span>Hit Points</span><p>{this.props.monsterInfo.mHp}</p>
+                        </div>
+
+                        <div className="listItemContainer" id="speedOut">
+                            <span>Speed</span><p>{this.props.monsterInfo.mSpeed}</p>
+                        </div>
+                        
+                    </div>
+                    
+                    <div className="abilityScoreContainer">
+
+                        <div className="listItemContainer" id="aScoreOut">
+                            <span>STR</span>
+
+                            <div className="statsContainer">
+                                <p>{this.props.monsterInfo.mStr} ({strMod})</p>
+                            </div>
+                            
+                        </div>
+
+                        <div className="listItemContainer" id="aScoreOut">
+                            <span>DEX</span>
+                            
+                            <div className="statsContainer">
+                                <p>{this.props.monsterInfo.mDex} ({dexMod})</p>
+                            </div>
+                            
+                        </div>
+                            
+                        <div className="listItemContainer" id="aScoreOut">
+                            <span>Con</span>
+                            
+                            <div className="statsContainer">
+                                <p>{this.props.monsterInfo.mCon} ({conMod})</p>
+                            </div>
+                            
+                        </div>
+                            
+                        <div className="listItemContainer" id="aScoreOut">
+                            <span>INT</span>
+                            
+                            <div className="statsContainer">
+                                <p>{this.props.monsterInfo.mInt} ({intMod})</p>
+                            </div>
+                            
+                        </div>
+                        
+                        <div className="listItemContainer" id="aScoreOut">
+                            <span>WIS</span>
+                            
+                            <div className="statsContainer">
+                                <p>{this.props.monsterInfo.mWis} ({wisMod})</p>
+                            </div>
+                            
+                        </div>
+
+                        <div className="listItemContainer" id="aScoreOut">
+                            <span>CHA</span>
+                            
+                            <div className="statsContainer">
+                                <p>{this.props.monsterInfo.mCha} ({chaMod})</p>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div className="extraInfoContainer">
+
+                        <div className="listItemContainer" id="vulnOut">
+                            <span>Vulnerabilities</span><p>{this.props.monsterInfo.mVul}</p>
+                        </div>
+
+                        <div className="listItemContainer" id="resOut">
+                            <span>Resistances</span><p>{this.props.monsterInfo.mRes}</p>
+                        </div>
+
+                        <div className="listItemContainer" id="immuneOut">
+                            <span>Immunities</span><p>{this.props.monsterInfo.mImmune}</p>
+                        </div>
+
+                        <div className="listItemContainer" id="senseOut">
+                            <span>Senses</span><p>{this.props.monsterInfo.mSenses}</p>
+                        </div>
+
+                        <div className="listItemContainer" id="langOut">
+                            <span>Languages</span><p>{this.props.monsterInfo.mLanguage}</p>
+                        </div>
+
+                        <div className="listItemContainer" id="notesOut">
+                            <span>Notes</span><p>{this.props.monsterInfo.mEnotes}</p>
+                        </div>
+
+                    </div>
+                   
                 <ActionList 
                     monsterInfo={this.props.monsterInfo} 
                     monsterMoves={this.props.monsterMoves}
                     deleteMonsterAttack={this.props.deleteMonsterAttack}
                 />
-                <button name='saveMonster' id='saveMonster' onClick={this.saveMonsterCard}>Save Monster</button>
+
+                <div className="saveMonsterButtonContainer">
+                    <button className='saveMonsterButton' id='saveMonster' onClick={this.saveMonsterCard}>Save Monster</button>
+                </div>
+                
             </div>
         )
     }

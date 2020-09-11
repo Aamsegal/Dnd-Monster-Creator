@@ -1,7 +1,47 @@
 .monsterCard {
     outline: 1px solid black;
-    background-color: #aaa;
-    height: 400px;
+    background-image: url(./MonsterCardBackground.jpg);
+    vertical-align: top;
+}
+
+.saveMonsterButtonContainer {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 75%;
+    border-top: 2px solid black;
+}
+
+.monsterCard span {
+    display:inline;
+}
+
+.monsterCard p {
+    display: inline;
+}
+
+.monsterCard {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+
+.coreMonsterStatsContainer span {
+    text-decoration: underline;
+}
+
+#cRating span, #mTypeOut span {
+    text-decoration: underline;
+}
+
+.listItemContainer p, .listItemContainer{
+    text-decoration: none;
+    color: rgb(139, 0, 0); 
+}
+
+.listItemContainer span {
+    color: black;
 }
 
 @media screen and (max-width: 800px) {
@@ -12,10 +52,132 @@
     
 }
 
-@media screen and (min-width: 801px) {
+@media screen and (min-width: 801px) and (max-width: 1150px) {
     .monsterCard {
         display: inline-block;
-        width: 35%;
+        width: 45%;
+        margin-left: 10px;
+        margin-right: 10px;        
     }
+}
+
+@media screen and (min-width: 1151px) {
+    .monsterCard {
+        display: inline-block;
+        width: 40%;
+        margin-left: 45px;
+        margin-right: 45px;
+    }
+
+    /*Css for monster Identity container*/
+    .monsterIdentitycontainer, .coreMonsterStatsContainer, .abilityScoreContainer, .extraInfoContainer {
+        width: 75%;
+        margin-left: auto;
+        margin-right: auto;
+
+    }
+
+    #mNameOut {
+        height: 33px;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        border-bottom: 2px solid rgb(139, 0, 0);
+    }
+
+    #mNameOut p {
+        margin-top: 0px;
+        margin-bottom: 0px;
+        font-size: 30px;
+        padding-left: 5px;
+    }
+
+    #cRating, #mTypeOut {
+        font-size: 18px;
+        display: inline-block;
+        width: 50%;
+        padding-bottom: 5px;
+    }
+
+    #cRating p, #mTypeOut p {
+        font-size: 20px;
+        padding-left: 10px;
+    }
+
+    #mTypeOut {
+        display: inline-block;
+    }
+
+    .monsterIdentitycontainer {
+        border-bottom: 3px solid rgb(139, 0, 0);
+    }
+
+    /*Css for core Monster Stats Container*/
+    .coreMonsterStatsContainer {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-bottom: 3px solid rgb(139, 0, 0);
+    }
+
     
+
+    .coreMonsterStatsContainer .listItemContainer {
+        font-size: 14px;
+        font-weight: bold;
+        display:inline-block;
+        width: 50%;
+        
+    }
+
+    .coreMonsterStatsContainer .listItemContainer p{
+        font-size: 14px;
+        padding-left: 10px;
+    }
+
+    /*Css for Ability Score container*/
+    .abilityScoreContainer {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-bottom: 3px solid rgb(139, 0, 0);
+        text-align: center;
+    }
+
+    #aScoreOut.listItemContainer  {
+        display: inline-block;
+        text-align: center;
+        width: 15%;
+        border-left: 1px solid rgb(139, 0, 0);
+        border-right: 1px solid rgb(139, 0, 0);
+        font-size: 16px;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .statsContainer p{
+        font-size: 20px;
+    }
+
+    /*Css for Extra Info container*/
+    .extraInfoContainer {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-bottom: 3px solid rgb(139, 0, 0);
+    }
+
+    .extraInfoContainer .listItemContainer span {
+        font-size: 16px;
+        font-weight: bold;
+        text-decoration: underline;
+    }
+
+    .extraInfoContainer .listItemContainer p {
+        font-size: 18px;
+        font-weight: bold;
+        padding-left: 10px;
+        
+    }
+
+    .saveMonsterButtonContainer {
+        padding-bottom: 20px;
+        padding-top: 20px;
+    }
 }

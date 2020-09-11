@@ -45,7 +45,9 @@
 
     #currentUsername {
         display: inline;
-        text-align: right;
+        position: absolute;
+        right: 5%;
+        top: 30%;
     }
 
     #loginForm p {
@@ -53,6 +55,9 @@
         margin-left: auto;
         margin-right: auto;
         color: black;
+        text-decoration: none;
     }
+
+
 
 }

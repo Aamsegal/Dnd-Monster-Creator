@@ -5,18 +5,21 @@ import CombatRatingSuggestion from './CombatRatingSuggestion/combatRatingSuggest
 import LoadingMonsters from './LoadingMonsters/LoadingMonsters'
 import LoginBar from './loginBar/loginBar'
 import { v4 as uuidv4 } from 'uuid';
+import Cookies from 'universal-cookie';
 import config from './config';
 
 import './App.css'
+const cookies = new Cookies();
 
 class App extends Component {
+
   state = {
     monsterStats: {
       user_id: 0,
       monster_id: 0,
       mName: '',
       mType: '',
-      mCr: '0',
+      mCr: 0,
       mAtk: 0,
       mSaveDc: 0,
       mProf: 0,
@@ -40,13 +43,25 @@ class App extends Component {
     startingPoint: [],
     monsters: [],
     monsterMoves: []
-  }
+  }  
 
 
   //  Grabs info from api endpoint
   //Grab only info relivant for the user. Depending on size (less than 200 kb)
   //Either pull all of it at the start for less requests, or if larger
   componentDidMount() {
+
+    let cookiedUser = (cookies.get('user_id'));
+    if (typeof cookiedUser !== 'undefined') {
+
+      this.setState(prevState => ({
+        monsterStats: {
+          ...prevState.monsterStats,
+          user_id: cookiedUser
+      }}))
+
+    }
+
     Promise.all([
         fetch(`${config.API_ENDPOINT}/api/monsterStartingPoint`),
         fetch(`${config.API_ENDPOINT}/api/monsters/userId/${this.state.monsterStats.user_id}`)/*,
@@ -133,6 +148,8 @@ class App extends Component {
             ...prevState.monsterStats,
             user_id: data[0].id
         }}))
+
+        cookies.set('user_id', data[0].id)
 
         this.setState(prevState => ({
           monsterStats: {
@@ -417,7 +434,7 @@ class App extends Component {
       return
     }
 
-    const newMonster = {
+    const requiredInfo = {
       user_id: user_id,
       id: monster_id,
       monster_name: monster_name,
@@ -435,12 +452,22 @@ class App extends Component {
       inteligence: inteligence,
       wisdom: wisdom,
       charisma: charisma,
+    }
+
+    const nonRequiredInfo = {
       damagevulnerability: damagevulnerability,
       damageresistances: damageresistances,
       damageimmunities: damageimmunities,
       senses: senses,
       creature_language: creature_language,
       notes: notes
+    }
+
+    this.inputValidation(requiredInfo);
+
+    const newMonster = {
+      ...requiredInfo,
+      ...nonRequiredInfo
     }
     
     fetch(`${config.API_ENDPOINT}/api/monsters/monsterId/${monster_id}`, {
@@ -453,6 +480,7 @@ class App extends Component {
 
     .then(res => {
       if(!res.ok) {
+        console.log(res)
         return res.json().then(e => Promise.reject(e))
       }
 
@@ -465,9 +493,12 @@ class App extends Component {
       return res.json()
     })
 
+    .then(data => {
+      console.log(data)
+    })
+
     .catch(error => {
-      /*window.alert(error.message)
-      console.error({error})*/
+      //console.error({error})
     })
   }
 
@@ -497,6 +528,47 @@ class App extends Component {
         console.error({error})*/
       })
     })
+  }
+
+  inputValidation = object => {
+
+    const keyToName = {
+      user_id: 'User Id',
+      monster_id: 'Monster Id',
+      monster_name: 'Monster Name',
+      monster_type: 'Monster Type',
+      challenge_rating: 'Combat Rating',
+      attackbonus: 'Attack Bonus',
+      savedc: 'Save Dc',
+      proficiencybonus: 'Proficiency',
+      armorclass: 'Armor Class',
+      hitpointsmHp: 'Hit Points',
+      speed: 'Movement Speed',
+      strength: 'Strength Score',
+      dexterity: 'Dexterity Score',
+      constitution: 'Constitution Score',
+      inteligence: 'Inteligence Score',
+      wisdom: 'Wisdom Score',
+      charisma: 'Charisma Score',
+    }
+
+    const invalidInputs = []
+
+    Object.entries(object).forEach(([key, value]) => {
+      if (value === 0 || value === '') {
+        invalidInputs.push(key)
+      }
+    })
+
+    console.log(invalidInputs.length)
+      
+
+    if (invalidInputs != []) {
+      let topInvalidKey = invalidInputs[0];
+      let missingInput = keyToName[topInvalidKey];
+      window.alert(`You are missing the "${missingInput}" field. Please fill it out before, and other you may be missing before you try again.`)
+    }
+
   }
 
   loadSavedMonsters = savedMonsters => {
@@ -662,12 +734,12 @@ class App extends Component {
   }
 
   deleteMonster = monsterId => {
-    const toBeDeletedId = parseInt(monsterId);
-    const monsterList = this.state.monsters;
+    const toBeDeletedId = (monsterId); //Checks the id of the current monster selected
+    const monsterList = this.state.monsters; //grabs the monster list
     
-    monsterList.forEach((monster, i) => {
+    monsterList.forEach((monster, i) => { //Iterates through monster list looking for any monster that has an ID = to toBeDeletedId
       
-      if(monster.id === toBeDeletedId) {
+      if(monster.id === toBeDeletedId) { //If any matches are found it makes an api request to the server 
         fetch(`${config.API_ENDPOINT}/api/monsters/monsterId/${toBeDeletedId}`, {
           method: 'DELETE',
           headers: {
@@ -679,19 +751,19 @@ class App extends Component {
           if (!res.ok)
             return res.json().then(e => Promise.reject(e))
           
+          /*If the respons is ok, it will delete the monster from the list*/
           let newMonsterList = this.state.monsters;
           newMonsterList.splice(i,1);
-          this.setState({monsters: newMonsterList})
-          return res.json
+          this.setState({monsters: newMonsterList});
+          return res.json;
         })
 
         .catch(error => {
-          /*console.log('6')
-          console.error({error})*/
+          /*console.error({error})*/
         })
           
-          
       }
+
     })
   }
 
@@ -748,7 +820,7 @@ class App extends Component {
             deleteMonster={this.deleteMonster}
           />
           
-          <div id = "monsterInfoContainer">
+          <div className = "monsterInfoContainer">
             <BaseMonsterStats 
             updateMonsterStats={this.updateMonsterStats}
             monsterStats={this.state.monsterStats}

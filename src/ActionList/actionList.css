@@ -1,0 +1,73 @@
+.monsterActions h1, .monsterReactions h1, .monsterSkills h1 {
+    color: rgb(139, 0, 0);
+}
+
+@media screen and (max-width: 800px) {
+    .monsterCard {
+        margin-left: 10%; 
+        margin-right: 10%
+    }
+    
+}
+
+@media screen and (min-width: 801px) and (max-width: 1150px) {
+    .monsterCard {
+        display: inline-block;
+        width: 45%;
+        margin-left: 10px;
+        margin-right: 10px;        
+    }
+}
+
+@media screen and (min-width: 1151px) {
+    .monsterMovesContainer {
+        width: 75%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .monsterMovesContainer h1 {
+        font-size: 24px;
+        border-bottom: 2px solid rgb(139, 0, 0);
+    }
+
+    .singleActionContainer {
+        padding-bottom: 10px;
+        padding-top: 5px;
+        border-bottom: 2px solid black;
+    }
+
+    .singleActionContainer p {
+        text-decoration: none;
+        color:black;
+
+    }
+
+    .singleActionCoreInfo p{
+        font-size: 16px;
+    }
+    
+    .singleActionCoreInfo {
+        border-bottom: 1px solid black;
+        padding-bottom: 2px;
+        margin-bottom: 5px;
+    }
+
+    .singleActionName {
+        font-weight: bold;
+        padding-right: 10px;
+    }
+
+    .singleActionToHit , .singleActionDamage {
+        font-size: 14px;
+    }
+
+    .singleActionToHit {
+        padding-right: 15px;
+        border-right: 1px solid black;
+    }
+
+    .singleActionDamage {
+        padding-left: 15px;
+    }
+}

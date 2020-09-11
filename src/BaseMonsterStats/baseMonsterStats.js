@@ -58,121 +58,162 @@ class BaseMonsterStats extends Component {
 
     render() {
         return (
-            <div className = 'baseMonsterInfo'>
+            <div className = 'baseMonsterInfo' id = "baseMonsterInfo">
 
                 <button onClick={() => this.formVisibility(1)}>Base Stats</button>
                 <button onClick={() => this.formVisibility(2)}>Attack/Abilities/Skills</button>
 
                 <div id="baseStatsForm">
-                    <form onSubmit={this.handleSubmit}>
 
-                        <label htmlFor="name">Name</label>
-                        <input type="text" id="mName" name="name" placeholder="monster name" 
-                        value={this.props.monsterStats.mName}
-                        onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
+                        <div id = "inputContainer">
+                            <label htmlFor="name" id="inputLabel">Name</label>
+                            <input type="text" id="mName" name="mname" placeholder="monster name" 
+                            value={this.props.monsterStats.mName}
+                            onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
+                        </div>
+                        
+                        <div id = "inputContainer">
+                            <label htmlFor="type" id="inputLabel">Monster Type</label>
+                            <input type="text" id="mType" name="type" placeholder="large fiend, small"
+                            value={this.props.monsterStats.mType}
+                            onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
+                        </div>
+                        
+                        <div id = "inputContainer">
+                            <label htmlFor="mCr" id="inputLabel">Combat Rating</label>
+                            <input type="number" id="mCr" name="combatRating" placeholder="0-30" min="0" max="30"
+                            value={this.props.monsterStats.mCr}
+                            onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
+                        </div>
+                        
+                        <div id = "inputContainer">
+                            <label htmlFor="mProf" id="inputLabel">Proficiency</label>
+                            <input type="number" id="mProf" name='proficienct' placeholder='2-15' min="2" max="15"
+                            value={this.props.monsterStats.mProf} 
+                            onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
+                        </div>
+                        
+                        <div id = "inputContainer">
+                            <label htmlFor="mAtk" id="inputLabel">Attack Bonus</label>
+                            <input type="number" id="mAtk" name='attackBonus' placeholder='3-15' min="3" max="15"
+                            value={this.props.monsterStats.mAtk} 
+                            onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
+                        </div>
+                        
+                        <div id = "inputContainer">
+                            <label htmlFor="mSaveDc" id="inputLabel">Save Dc</label>
+                            <input type="number" id="mSaveDc" name='savedc' placeholder='10-23' min="10" max="25"
+                            value={this.props.monsterStats.mSaveDc} 
+                            onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
+                        </div>
+                        
+                        <div id = "inputContainer">
+                            <label htmlFor="armor" id="inputLabel">Armor Class</label>
+                            <input type="number" id="mArmor" name="armor" placeholder="0-25" min="0" max="25"
+                            value={this.props.monsterStats.mArmor}
+                            onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
+                        </div>
+                        
+                        <div id = "inputContainer">
+                            <label htmlFor="hitpoints" id="inputLabel">Hitpoints</label>
+                            <input type="number" id="mHp" name="hitpoints" placeholder="hitpoints"
+                            value={this.props.monsterStats.mHp}
+                            onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
+                        </div>
+                        
+                        <div id = "inputContainer">
+                            <label htmlFor="speed" id="inputLabel">Movement Speed</label>
+                            <input type="text" id="mSpeed" name="speed" placeholder="30 ft, 60 fly, 20 swim"
+                            value={this.props.monsterStats.mSpeed}
+                            onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
+                        </div>
+                        
+                        <div id = "inputContainer">
+                            <label htmlFor="strength" id="inputLabel">Strength (STR)</label>
+                            <input type="number" id="mStr" name="strength" placeholder="10" min="1" max="20"
+                            value={this.props.monsterStats.mStr}
+                            onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
+                        </div>
 
-                        <label htmlFor="type">Monster Type</label>
-                        <input type="text" id="mType" name="type" placeholder="large fiend, small"
-                        value={this.props.monsterStats.mType}
-                        onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
-
-                        <label htmlFor="mCr">Combat Rating</label>
-                        <input type="number" id="mCr" name="combatRating" placeholder="0-20" min="0" max="20"
-                        value={this.props.monsterStats.mCr}
-                        onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
-
-                        <label htmlFor="mProf">Proficiency</label>
-                        <input type="number" id="mProf" name='proficienct' placeholder='2-15' min="2" max="15"
-                        value={this.props.monsterStats.mProf} 
-                        onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
-
-                        <label htmlFor="mAtk">Attack Bonus</label>
-                        <input type="number" id="mAtk" name='attackBonus' placeholder='3-15' min="3" max="15"
-                        value={this.props.monsterStats.mAtk} 
-                        onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
-
-                        <label htmlFor="mSaveDc">Save Dc</label>
-                        <input type="number" id="mSaveDc" name='savedc' placeholder='10-23' min="10" max="25"
-                        value={this.props.monsterStats.mSaveDc} 
-                        onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
-
-                        <label htmlFor="armor">Armor Class</label>
-                        <input type="number" id="mArmor" name="armor" placeholder="0-25" min="0" max="25"
-                        value={this.props.monsterStats.mArmor}
-                        onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
-
-                        <label htmlFor="hitpoints">Hitpoints</label>
-                        <input type="number" id="mHp" name="hitpoints" placeholder="hitpoints"
-                        value={this.props.monsterStats.mHp}
-                        onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
-
-                        <label htmlFor="speed">Movement Speed</label>
-                        <input type="text" id="mSpeed" name="speed" placeholder="30 ft, 60 fly, 20 swim"
-                        value={this.props.monsterStats.mSpeed}
-                        onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
-
-                        <label htmlFor="strength">Strength Score</label>
-                        <input type="number" id="mStr" name="strength" placeholder="10" min="1" max="20"
-                        value={this.props.monsterStats.mStr}
-                        onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
-
-                        <label htmlFor="dexterity">Dexterity Score</label>
-                        <input type="number" id="mDex" name="dexterity" placeholder="10" min="1" max="20"
-                        value={this.props.monsterStats.mDex}
-                        onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
-
-                        <label htmlFor="constitution">Constitution Score</label>
-                        <input type="number" id="mCon" name="constitution" placeholder="10" min="1" max="20"
-                        value={this.props.monsterStats.mCon}
-                        onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
-
-                        <label htmlFor="inteligence">Inteligence Score</label>
-                        <input type="number" id="mInt" name="inteligence" placeholder="10" min="1" max="20"
-                        value={this.props.monsterStats.mInt}
-                        onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
-
-                        <label htmlFor="wisdom">Wisdom Score</label>
-                        <input type="number" id="mWis" name="wisdom" placeholder="10" min="1" max="20"
-                        value={this.props.monsterStats.mWis}
-                        onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
-
-                        <label htmlFor="charisma">Charisma Score</label>
-                        <input type="number" id="mCha" name="charisma" placeholder="10" min="1" max="20"
-                        value={this.props.monsterStats.mCha}
-                        onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
-
-                        <label htmlFor="vulnerability">Vulnerability</label>
-                        <input type="text" id="mVul" name="vulnerabilty" placeholder="Holy, Necrotic, Slashing"
-                        value={this.props.monsterStats.mVuln} 
-                        onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
-
-                        <label htmlFor="resistance">Resistance</label>
-                        <input type="text" id="mRes" name="resistance" placeholder="Holy, Necrotic, Slashing"
-                        value={this.props.monsterStats.mRes} 
-                        onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
-
-                        <label htmlFor="immunities">Immunities</label>
-                        <input type="text" id="mImmune" name="immunities" placeholder="Holy, Necrotic, Slashing"
-                        value={this.props.monsterStats.mImmune} 
-                        onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
-
-                        <label htmlFor="senses">Senses</label>
-                        <input type="text" id='mSenses' name='senses' placeholder="Darkvision, Tremor Sense, Truesight"
-                        value={this.props.monsterStats.mSenses} 
-                        onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
-
-                        <label htmlFor="languages">Languages</label>
-                        <input type="text" id="mLanguage" name="language" placeholder="Common, Dwavin, Elvish"
-                        value={this.props.monsterStats.mLanguage} 
-                        onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
-
-                        <label htmlFor="notes">Extra Notes</label>
-                        <input type="text" id="mEnotes" name="notes" placeholder="Monster notes"
-                        value={this.props.monsterStats.mEnotes} 
-                        onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
-
+                        <div id = "inputContainer">
+                            <label htmlFor="dexterity" id="inputLabel">Dexterity (DEX)</label>
+                            <input type="number" id="mDex" name="dexterity" placeholder="10" min="1" max="20"
+                            value={this.props.monsterStats.mDex}
+                            onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
+                        </div>
+                        
+                        <div id = "inputContainer">
+                            <label htmlFor="constitution" id="inputLabel">Constitution (CON)</label>
+                            <input type="number" id="mCon" name="constitution" placeholder="10" min="1" max="20"
+                            value={this.props.monsterStats.mCon}
+                            onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
+                        </div>
+                        
+                        <div id = "inputContainer">
+                            <label htmlFor="inteligence" id="inputLabel">Inteligence (INT)</label>
+                            <input type="number" id="mInt" name="inteligence" placeholder="10" min="1" max="20"
+                            value={this.props.monsterStats.mInt}
+                            onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
+                        </div>
+                        
+                        <div id = "inputContainer">
+                            <label htmlFor="wisdom" id="inputLabel">Wisdom (WIS)</label>
+                            <input type="number" id="mWis" name="wisdom" placeholder="10" min="1" max="20"
+                            value={this.props.monsterStats.mWis}
+                            onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
+                        </div>
+                        
+                        <div id = "inputContainer">
+                            <label htmlFor="charisma" id="inputLabel">Charisma (CHA)</label>
+                            <input type="number" id="mCha" name="charisma" placeholder="10" min="1" max="20"
+                            value={this.props.monsterStats.mCha}
+                            onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
+                        </div>
+                        
+                        <div id = "inputContainer">
+                            <label htmlFor="vulnerability" id="inputLabel">Vulnerability</label>
+                            <input type="text" id="mVul" name="vulnerabilty" placeholder="Holy, Necrotic, Slashing"
+                            value={this.props.monsterStats.mVuln} 
+                            onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
+                        </div>
+                        
+                        <div id = "inputContainer">
+                           <label htmlFor="resistance" id="inputLabel">Resistance</label>
+                            <input type="text" id="mRes" name="resistance" placeholder="Holy, Necrotic, Slashing"
+                            value={this.props.monsterStats.mRes} 
+                            onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
+                        </div>
+                        
+                        <div id = "inputContainer">
+                           <label htmlFor="immunities" id="inputLabel">Immunities</label>
+                            <input type="text" id="mImmune" name="immunities" placeholder="Holy, Necrotic, Slashing"
+                            value={this.props.monsterStats.mImmune} 
+                            onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
+                        </div>
+                        
+                        <div id = "inputContainer">
+                           <label htmlFor="senses" id="inputLabel">Senses</label>
+                            <input type="text" id='mSenses' name='senses' placeholder="Darkvision, Tremor Sense, Truesight"
+                            value={this.props.monsterStats.mSenses} 
+                            onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
+                        </div>
+                        
+                        <div id = "inputContainer">
+                            <label htmlFor="languages" id="inputLabel">Languages</label>
+                            <input type="text" id="mLanguage" name="language" placeholder="Common, Dwavin, Elvish"
+                            value={this.props.monsterStats.mLanguage} 
+                            onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
+                        </div>
+                        
+                        <div id = "inputContainer">
+                            <label htmlFor="notes" id="inputLabel">Extra Notes</label>
+                            <input type="text" id="mEnotes" name="notes" placeholder="Monster notes"
+                            value={this.props.monsterStats.mEnotes} 
+                            onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
+                        </div>
+                        
                         {/*<button>Submit</button>*/}
-                    </form>
+
                 </div>
                 
                 <div  id="movesForm" style={{display: 'none'}}>

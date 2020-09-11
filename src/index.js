@@ -6,10 +6,12 @@ import HomePage from './homePage/homepage'
 import './index.css';
 
 ReactDOM.render(
-    <BrowserRouter>
-        
-        <Route exact path="/" component={HomePage} />
-        <Route path="/application" component={App} />
 
-    </BrowserRouter>, 
+        <BrowserRouter>
+                
+                <Route exact path="/" component={HomePage} />
+                <Route path="/application" component={App} />
+
+        </BrowserRouter>, 
+    
 document.getElementById('root'));
