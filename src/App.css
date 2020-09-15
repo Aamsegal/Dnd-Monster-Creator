@@ -17,14 +17,28 @@
 }
 
 @media screen and (max-width: 800px) {
-    .monsterCard {
-        margin-left: 10%; 
-        margin-right: 10%
+
+    .monsterInfoContainer {
+        width: 90%;
     }
     
 }
 
-@media screen and (min-width: 801px) {
+@media screen and (min-width: 801px) and (max-width: 1150px) {
+    .monsterInfoContainer {
+        margin-top: 30px;
+    }
+
+    .monsterInfoContainer {
+        width: 95%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 50px;
+        text-align: center;
+    }
+}
+
+@media screen and (min-width: 1151px) {
     .monsterInfoContainer {
         margin-top: 30px;
     }

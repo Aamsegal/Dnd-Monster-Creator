@@ -9,6 +9,7 @@ import Cookies from 'universal-cookie';
 import config from './config';
 
 import './App.css'
+const moment = require("moment")
 const cookies = new Cookies();
 
 class App extends Component {
@@ -50,9 +51,15 @@ class App extends Component {
   //Grab only info relivant for the user. Depending on size (less than 200 kb)
   //Either pull all of it at the start for less requests, or if larger
   componentDidMount() {
-
+    
+    
     let cookiedUser = (cookies.get('user_id'));
-    if (typeof cookiedUser !== 'undefined') {
+    let cookiedUsername = (cookies.get('username'));
+
+    //cookies.remove('user_id')
+    //cookies.remove('username')
+
+    if(typeof cookiedUser !== 'undefined') {
 
       this.setState(prevState => ({
         monsterStats: {
@@ -60,11 +67,17 @@ class App extends Component {
           user_id: cookiedUser
       }}))
 
-    }
+      this.setState(prevState => ({
+        monsterStats: {
+          ...prevState.monsterStats,
+          currentUserName: cookiedUsername
+      }}))
 
+    }
+    
     Promise.all([
         fetch(`${config.API_ENDPOINT}/api/monsterStartingPoint`),
-        fetch(`${config.API_ENDPOINT}/api/monsters/userId/${this.state.monsterStats.user_id}`)/*,
+        fetch(`${config.API_ENDPOINT}/api/monsters/userId/${cookies.get('user_id')}`)/*,
         fetch(`${config.API_ENDPOINT}/api/monsterMoves`)*/
     ])
         .then(([suggestionRes, monsterRes/*, movesRes*/]) => {
@@ -82,8 +95,7 @@ class App extends Component {
         })
 
         .catch(error => {
-          /*console.log('1')
-          console.error({error})*/
+          /*console.error({error})*/
         })
   }
 
@@ -113,8 +125,7 @@ class App extends Component {
     })
 
     .catch(error => {
-      /*console.log('2')
-      console.error({error})*/
+      /*console.error({error})*/
     })
   }
 
@@ -141,7 +152,7 @@ class App extends Component {
       if(data.length === 0) {
         window.alert('There is no user with that username and password. Try again.');
       } else {
-        window.alert(`You have logged into ${data[0].username}`)
+        window.alert(`You have logged into ${data[0].username}`)     
 
         this.setState(prevState => ({
           monsterStats: {
@@ -149,22 +160,24 @@ class App extends Component {
             user_id: data[0].id
         }}))
 
-        cookies.set('user_id', data[0].id)
-
         this.setState(prevState => ({
           monsterStats: {
             ...prevState.monsterStats,
             currentUserName: data[0].username
         }}))
 
+        const now = moment()
+        const fiveDays = moment(now).add(1, 'minute').format('LLL')
+        cookies.set('user_id', data[0].id, {'sameSite': true, 'expires ': fiveDays});
+        cookies.set('username', data[0].username, {'sameSite': true, 'expires ': fiveDays})
+        
         let loggedInUserId = data[0].id
         this.loadMonsterList(loggedInUserId)
       }
     })
 
     .catch(error => {
-      /*console.log('3')
-      console.error({error})*/
+      /*console.error({error})*/
     })
   }
 
@@ -480,7 +493,6 @@ class App extends Component {
 
     .then(res => {
       if(!res.ok) {
-        console.log(res)
         return res.json().then(e => Promise.reject(e))
       }
 
@@ -494,7 +506,6 @@ class App extends Component {
     })
 
     .then(data => {
-      console.log(data)
     })
 
     .catch(error => {
@@ -524,8 +535,7 @@ class App extends Component {
       })
 
       .catch(error => {
-        /*console.log('5')
-        console.error({error})*/
+        /*console.error({error})*/
       })
     })
   }
@@ -558,12 +568,9 @@ class App extends Component {
       if (value === 0 || value === '') {
         invalidInputs.push(key)
       }
-    })
+    })      
 
-    console.log(invalidInputs.length)
-      
-
-    if (invalidInputs != []) {
+    if (invalidInputs.length != 0) {
       let topInvalidKey = invalidInputs[0];
       let missingInput = keyToName[topInvalidKey];
       window.alert(`You are missing the "${missingInput}" field. Please fill it out before, and other you may be missing before you try again.`)
@@ -790,8 +797,7 @@ class App extends Component {
         })
 
         .catch(error => {
-          /*console.log('7')
-          console.error({error})*/
+          /*console.error({error})*/
         })
       }
     })

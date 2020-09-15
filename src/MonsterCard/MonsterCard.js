@@ -18,7 +18,7 @@ class MonsterCard extends Component {
         const chaMod = Math.floor(parseInt((this.props.monsterInfo.mCha)-10)/2)
 
         return (
-            <div className="monsterCard">
+            <div className="monsterCard" id="monsterCard">
 
                     <div className="monsterIdentitycontainer">
                         <div className="listItemContainer" id="mNameOut">

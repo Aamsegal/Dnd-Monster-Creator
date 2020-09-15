@@ -10,14 +10,12 @@ class LoginBar extends Component {
         let username = window.prompt("Enter your username")
 
         if (username === null) {
-            console.log('username was null')
             return
         }
 
         let password = window.prompt("Enter your password")
 
         if( password === null) {
-            console.log("password was null")
             return
         }
 
@@ -52,7 +50,6 @@ class LoginBar extends Component {
         let password = window.prompt("Please choose a password");
 
         if( password === null) {
-            console.log("password was null")
             return
         }
 
@@ -80,6 +77,29 @@ class LoginBar extends Component {
         return <p>Current User: {loggedInUsername}</p>
         }
     }
+
+    formVsOutputVisibility(value) {
+        if (value === 1) {
+            document.getElementById('monsterCardOn').style.display = "block";
+            document.getElementById('monsterStatsOn').style.display = "none";
+
+            document.getElementById('combatRatingSelectionContainer').style.display = "block";
+            document.getElementById('loadingMonsters').style.display = "block";
+            document.getElementById('baseMonsterInfo').style.display = "block";
+
+            document.getElementById('monsterCard').style.display = "none";
+        } else if (value === 2) {
+            document.getElementById('monsterCardOn').style.display = "none";
+            document.getElementById('monsterStatsOn').style.display = "block";
+
+            document.getElementById('combatRatingSelectionContainer').style.display = "none";
+            document.getElementById('loadingMonsters').style.display = "none";
+            document.getElementById('baseMonsterInfo').style.display = "none";
+
+            document.getElementById('monsterCard').style.display = "block";
+        }
+
+    }
       
 
     render() {
@@ -87,10 +107,15 @@ class LoginBar extends Component {
         return (
             <div className="loginForm" id="loginForm">
                 <div id = "loginButtons">
-                    <button><Link to='/'>Homepage</Link></button>
-                    <button onClick={() => this.createNewUser()}>New User</button>
-                    <button onClick={() => this.loginRequest()}>Login</button>
+                    <button className="loginButton"><Link to='/'>Homepage</Link></button>
+                    <button className="loginButton" onClick={() => this.createNewUser()}>New User</button>
+                    <button className="loginButton" onClick={() => this.loginRequest()}>Login</button>
                     
+                </div>
+
+                <div className="monsterStats_MonsterCardToggle">
+                    <button className="monsterStatsOn" id="monsterStatsOn" onClick={() => this.formVsOutputVisibility(1)}>Monster Stats</button>
+                    <button className="monsterCardOn" id="monsterCardOn" onClick={() => this.formVsOutputVisibility(2)}>Monster Card</button>
                 </div>
                 
                 
