@@ -3,15 +3,20 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route } from 'react-router-dom';
 import App from './App';
 import HomePage from './homePage/homepage'
+import { CookiesProvider } from "react-cookie";
 import './index.css';
 
 ReactDOM.render(
+        <CookiesProvider>
 
-        <BrowserRouter>
+                <BrowserRouter>
                 
-                <Route exact path="/" component={HomePage} />
-                <Route path="/application" component={App} />
+                        <Route exact path="/" component={HomePage} />
+                        <Route path="/application" component={App} />
 
-        </BrowserRouter>, 
+                </BrowserRouter>,
+                
+        </CookiesProvider>,
+                         
     
 document.getElementById('root'));

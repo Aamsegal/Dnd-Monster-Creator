@@ -5,11 +5,10 @@ import CombatRatingSuggestion from './CombatRatingSuggestion/combatRatingSuggest
 import LoadingMonsters from './LoadingMonsters/LoadingMonsters'
 import LoginBar from './loginBar/loginBar'
 import { v4 as uuidv4 } from 'uuid';
-import Cookies from 'universal-cookie';
 import config from './config';
+import Cookies from 'universal-cookie';
+import './App.css';
 
-import './App.css'
-const moment = require("moment")
 const cookies = new Cookies();
 
 class App extends Component {
@@ -52,12 +51,11 @@ class App extends Component {
   //Either pull all of it at the start for less requests, or if larger
   componentDidMount() {
     
-    
     let cookiedUser = (cookies.get('user_id'));
     let cookiedUsername = (cookies.get('username'));
 
     //cookies.remove('user_id')
-    //cookies.remove('username')
+    
 
     if(typeof cookiedUser !== 'undefined') {
 
@@ -72,12 +70,16 @@ class App extends Component {
           ...prevState.monsterStats,
           currentUserName: cookiedUsername
       }}))
+    } else {
+
+      cookiedUser = 0;
 
     }
     
+    
     Promise.all([
         fetch(`${config.API_ENDPOINT}/api/monsterStartingPoint`),
-        fetch(`${config.API_ENDPOINT}/api/monsters/userId/${cookies.get('user_id')}`)/*,
+        fetch(`${config.API_ENDPOINT}/api/monsters/userId/${cookiedUser}`)/*,
         fetch(`${config.API_ENDPOINT}/api/monsterMoves`)*/
     ])
         .then(([suggestionRes, monsterRes/*, movesRes*/]) => {
@@ -165,11 +167,12 @@ class App extends Component {
             ...prevState.monsterStats,
             currentUserName: data[0].username
         }}))
-
-        const now = moment()
-        const fiveDays = moment(now).add(1, 'minute').format('LLL')
-        cookies.set('user_id', data[0].id, {'sameSite': true, 'expires ': fiveDays});
-        cookies.set('username', data[0].username, {'sameSite': true, 'expires ': fiveDays})
+        
+        const fiveDays = 60*60*24*5
+        
+        cookies.set('user_id', data[0].id, {secure: true, maxAge: fiveDays});
+        cookies.set('username', data[0].username, {secure: true, maxAge: fiveDays});
+        
         
         let loggedInUserId = data[0].id
         this.loadMonsterList(loggedInUserId)
