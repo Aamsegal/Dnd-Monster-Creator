@@ -44,6 +44,13 @@
     color: black;
 }
 
+.saveMonsterButton {
+    border-radius: 15px;
+    background-color: #383838; /* Green */
+    border: none;
+    color: white;
+}
+
 @media screen and (max-width: 800px) {
     .monsterCard {
         margin-left: 2.5%; 
@@ -156,6 +163,12 @@
     .saveMonsterButtonContainer {
         padding-bottom: 20px;
         padding-top: 20px;
+    }
+
+    .saveMonsterButton {
+        width: 140px;
+        height: 30px;
+        font-weight: bold;
     }
     
 }
@@ -273,6 +286,12 @@
     .saveMonsterButtonContainer {
         padding-bottom: 20px;
         padding-top: 20px;
+    }
+
+    .saveMonsterButton {
+        width: 140px;
+        height: 30px;
+        font-weight: bold;
     }
 }
 
@@ -395,5 +414,11 @@
     .saveMonsterButtonContainer {
         padding-bottom: 20px;
         padding-top: 20px;
+    }
+
+    .saveMonsterButton {
+        width: 140px;
+        height: 30px;
+        font-weight: bold;
     }
 }

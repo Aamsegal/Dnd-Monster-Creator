@@ -69,18 +69,17 @@ import {v4 as uuidv4 } from 'uuid';
             )*/
         } else {
             return (
-                <div id = "combatRatingSuggestionResultsContainer">
-                    <div id = "combatRatingSuggestionResults">
+                
+                    <div className ='combatRatingSuggestionResults' id = "combatRatingSuggestionResults">
                         <p>Combat Rating {this.state.combatRating} suggetions</p>
-                        <ul>
-                            <li>Armor Class {this.state.armorClassSuggestion}</li>
-                            <li>Hit Points {this.state.hitPointsSuggestion}</li>
-                            <li>Attack Bonus {this.state.attackBonusSuggestion}</li>
-                            <li>Damage per round {this.state.damagePerRoundSuggestion}</li>
-                            <li>Save dice check {this.state.saveDcSuggestion}</li>
+                        <ul className='combatRatingForm'>
+                            <li className='combatRatingListItem'>Armor Class {this.state.armorClassSuggestion}</li>
+                            <li className='combatRatingListItem'>Hit Points {this.state.hitPointsSuggestion}</li>
+                            <li className='combatRatingListItem'>Attack Bonus {this.state.attackBonusSuggestion}</li>
+                            <li className='combatRatingListItem'>Damage per round {this.state.damagePerRoundSuggestion}</li>
+                            <li className='combatRatingListItem'>Save dice check {this.state.saveDcSuggestion}</li>
                         </ul>
                     </div>
-                </div>
                 
             )
         }
@@ -93,7 +92,7 @@ import {v4 as uuidv4 } from 'uuid';
         return(
             <div id = "combatRatingSelectionContainer">            
                 <form id="combatRatingSelectionForm" onSubmit = {this.handleSubmit}>
-                    <label htlmfor="combatRatingSelection" id="combatRatingSelectionLabel">Select a combat raiting</label>
+                    <label htlmfor="combatRatingSelection" id="combatRatingSelectionLabel">Select a combat rating</label>
                     <select name="combatRatingSelection" id="combatRatingSelection">
                         {this.props.startingValues.map( cr => 
                             <option
@@ -102,8 +101,12 @@ import {v4 as uuidv4 } from 'uuid';
                             >{cr.combat_rating}</option>
                         )}
                     </select>
-                    <button>Submit</button>
-                    <h1>{this.monsterBaseStatsRender()}</h1>
+                    <button className="combatRatingSubmit">Submit</button>
+
+                    <div id = "combatRatingSuggestionResultsContainer">
+                        {this.monsterBaseStatsRender()}
+                    </div>
+
                 </form>
             </div>
         )

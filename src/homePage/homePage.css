@@ -32,6 +32,13 @@ button {
     color: #22252A;
 }
 
+.homepageButton {
+    border-radius: 15px;
+    background-color: white; /* Green */
+    border: none;
+    color: black;
+}
+
 @media screen and (max-width: 800px) {
     .introduction {
         padding-top: 20%;
@@ -73,8 +80,12 @@ button {
         font-weight: bold;
     }
     
-    
-    
+    .homepageButton {
+        width: 100px;
+        height: 20px;
+        font-weight: bold;
+    }
+   
 }
 
 @media screen and (min-width: 800px) {
@@ -120,6 +131,12 @@ button {
         width: 100px;
         height: 30px;
         font-size: 15px;
+        font-weight: bold;
+    }
+    
+    .homepageButton {
+        width: 120px;
+        height: 30px;
         font-weight: bold;
     }
 }

@@ -1,3 +1,4 @@
+
 .App {
     font-family: "Open Sans",
     sans-serif;
@@ -6,6 +7,8 @@
     /*text-align: center;*/
     /*line-height: 1.5;*/
     background-color: #383838;
+    /*background-image: url(./DndSightBackground.png);
+    background-size: 100%;*/
 }
 
 .monsterInfoContainer {

@@ -59,10 +59,12 @@ class BaseMonsterStats extends Component {
     render() {
         return (
             <div className = 'baseMonsterInfo' id = "baseMonsterInfo">
-
-                <button onClick={() => this.formVisibility(1)}>Base Stats</button>
-                <button onClick={() => this.formVisibility(2)}>Attack/Abilities/Skills</button>
-
+                
+                <div className='baseMonsterInfoButtonContainer'>
+                    <button className='baseStatsButton' onClick={() => this.formVisibility(1)}>Base Stats</button>
+                    <button className='baseStatsButton' onClick={() => this.formVisibility(2)}>Attack/Abilities/Skills</button>
+                </div>
+                
                 <div id="baseStatsForm">
 
                         <div id = "inputContainer">

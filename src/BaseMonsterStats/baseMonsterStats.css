@@ -9,6 +9,14 @@
     background-color: #aaa;
 }
 
+.baseStatsButton {
+    border-radius: 15px;
+
+    background-color: #383838; /* Green */
+    border: none;
+    color: white;
+}
+
 @media screen and (max-width: 800px) {
     .baseMonsterInfo {
         margin-left: 2.5%; 
@@ -114,16 +122,6 @@
         
     }
 
-    #baseMonsterInfo button {
-        width: 140px;
-        height: 25px;
-        margin-left: 5px;
-        margin-right: 5px;
-        margin-top: 10px;
-        margin-bottom: 15px;
-        text-decoration: bold;
-    }
-
     #baseStatsForm {
         text-align: left;
     }
@@ -148,6 +146,25 @@
         text-align: left;
         color: black;
         font-size: 18px;
+    }
+
+    .baseMonsterInfoButtonContainer {
+        margin-left: auto;
+        margin-right: auto;
+        width: 80%;
+        margin-top: 15px;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 3px solid #383838;
+    }
+
+    .baseStatsButton {
+        font-size: 16px;
+        width: 180px;
+        height: 30px;
+        margin-left: 5px;
+        margin-right: 5px;
+        text-decoration: bold;
     }
 
 

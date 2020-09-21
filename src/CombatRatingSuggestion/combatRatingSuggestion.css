@@ -2,14 +2,14 @@
     text-align: center;
 }
 
-p {
+#combatRatingSuggestionResults p {
     font-size: 24px;
     margin-bottom: 0px;
     text-decoration: underline;
 }
 
 
-#combatRatingSuggestionResults ul {
+.combatRatingForm {
     margin: 10px;
     margin-bottom: auto;
     margin-top: auto;
@@ -19,7 +19,7 @@ p {
 }
 
 
-#combatRatingSuggestionResults li {
+.combatRatingListItem {
     list-style-type: none;
     text-decoration: none;
     font-size: 16px;
@@ -34,19 +34,35 @@ p {
     border: 2px solid white; /*Adds a border to*/
 }
 
-#combatRatingSuggestionResultsContainer ul {
+.combatRatingForm {
     padding: 0;
+}
+
+.combatRatingSubmit{
+    border-radius: 15px;
+    background-color: white; 
+    border: none;
+    color: black;
+
+    
 }
 
 /*Css for when the view page is smaller or equal to 800px*/
 @media screen and (max-width: 800px) {
     #combatRatingSelectionContainer {
-        height: 60px;
-        border-bottom: 3px solid #929292;
         padding-top: 70px;
         margin-left: 20px;
         margin-right: 20px;
         
+    }
+
+    .combatRatingSubmit {
+        width: 100px;
+        margin-left: 5px;
+        margin-right: 5px;
+        font-size: 16px;
+
+        margin: 2.5px;
     }
 
     #combatRatingSuggestionResultsContainer {
@@ -62,10 +78,6 @@ p {
         margin: 2.5px;
     }
 
-    #combatRatingSelectionForm button {
-        margin: 2.5px;
-    }
-
     #combatRatingSuggestionResults p {
         margin-top: 10px;
     }
@@ -74,7 +86,12 @@ p {
         font-size: 22px;
     }
 
-    #combatRatingSuggestionResults li {
+    .combatRatingForm{
+        text-align: center;
+    }
+
+    .combatRatingListItem {
+        display: inline-block;
         font-size: 15px;
     }
 }
@@ -95,11 +112,23 @@ p {
 
     #combatRatingSelection {
         width: 170px;
+        margin-top: 5px;
+        margin-bottom: 20px;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+    .combatRatingSubmit {
+        width: 100px;
+        margin-left: 10px;
+        margin-right: 10px;
+        font-size: 16px;
+
         margin: 2.5px;
     }
 
-    #combatRatingSelectionForm button {
-        margin: 2.5px;
+    .combatRatingSuggestionResults {
+        margin-bottom: 20px;
     }
 
     #combatRatingSuggestionResults p {
@@ -107,15 +136,17 @@ p {
         font-size: 22px;
     }
 
-    #combatRatingSuggestionResults ul {
+    .combatRatingForm {
         /*margin-left: 5px;
         margin-right: 5px;
         padding-left: 20px;
         padding-right: 20px;*/
         text-align: center;
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
 
-    #combatRatingSuggestionResults li {
+    .combatRatingListItem {
         display: inline-block;
         /*font-size: 20px;*/
     }

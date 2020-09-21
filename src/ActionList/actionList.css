@@ -2,6 +2,14 @@
     color: rgb(139, 0, 0);
 }
 
+.singleActionDeleteButton {
+    border-radius: 15px;
+    background-color: #383838; /* Green */
+    border: none;
+    color: white;
+    font-weight: bold;
+}
+
 
 /*CSS for phone screens and smaller*/
 @media screen and (max-width: 800px) {
