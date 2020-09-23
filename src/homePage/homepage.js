@@ -22,7 +22,7 @@ class Homepage extends Component {
                 <div className = "introduction" id = "introduction">
                     <h1>Dnd Monster Creator</h1>
                     <h3>Create, Save, Enjoy!</h3>
-                    <button className='homepageButton'><Link to='/application'>Get Started</Link></button>
+                    <Link to='/application'><button className='homepageButton'>Get Started</button></Link>
                     <button className='homepageButton' onClick={this.moreInfoButton}>More Info</button>
                 </div>
 
