@@ -20,7 +20,7 @@ class Homepage extends Component {
             <header className = "introductionContainer">
 
                 <div className = "introduction" id = "introduction">
-                    <h1>Dnd Monster Creator</h1>
+                    <h1>D&d Monster Creator</h1>
                     <h3>Create, Save, Enjoy!</h3>
                     <Link to='/application'><button className='homepageButton'>Get Started</button></Link>
                     <button className='homepageButton' onClick={this.moreInfoButton}>More Info</button>
@@ -28,7 +28,7 @@ class Homepage extends Component {
 
                 <div className = "moreInfoPopup" id="moreInfoPopup">
                     <div className = "moreInfoPopup-Content" id="moreInfoPopup-Content">
-                        <p>This tool will allow you to build your own D&d Monster. You can log in to save your moster, 
+                        <p>This tool will allow you to build your own D&d Monster. You can log in to save your monster, 
                         or just take a screen shot when you are done. If you are stuck, feel free to choose a
                         combat rating from the suggestion bar to get a starting point for your creature. Enjoy!</p>
                        
