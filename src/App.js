@@ -52,11 +52,10 @@ class App extends Component {
   componentDidMount() {
     
     let cookiedUser = (cookies.get('user_id'));
-    let cookiedUsername = (cookies.get('username'));
+    let cookiedUsername = (cookies.get('username'));    
 
-    //cookies.remove('user_id')
-    
-
+    //  Checks if there there is a cookie fo the user then sets the state to that.
+    //it sets cookies user to 0 so no info will br grabbed
     if(typeof cookiedUser !== 'undefined') {
 
       this.setState(prevState => ({
@@ -78,18 +77,18 @@ class App extends Component {
     
     
     Promise.all([
+        //  Makes two api calls to monsterStartingPoint to get suggested stats and
+        //the monsters page to check if the current user (if there is one) has any saved monsters and grabs them
         fetch(`${config.API_ENDPOINT}/api/monsterStartingPoint`),
-        fetch(`${config.API_ENDPOINT}/api/monsters/userId/${cookiedUser}`)/*,
-        fetch(`${config.API_ENDPOINT}/api/monsterMoves`)*/
+        fetch(`${config.API_ENDPOINT}/api/monsters/userId/${cookiedUser}`)
+        
     ])
-        .then(([suggestionRes, monsterRes/*, movesRes*/]) => {
+        .then(([suggestionRes, monsterRes]) => {
           if(!suggestionRes.ok) 
             return suggestionRes.json().then(e => Promise.reject(e));
           if(!monsterRes.ok)
             return monsterRes.json().then(e => Promise.reject(e));
-          /*if(!movesRes.ok)
-            return movesRes.json().then(e => Promise.reject(e));*/
-          return Promise.all([suggestionRes.json(), monsterRes.json()/*, movesRes.json()*/])
+          return Promise.all([suggestionRes.json(), monsterRes.json()])
         })
 
         .then(([startingPoint, monsters/*, monsterMoves*/]) => {
@@ -131,6 +130,7 @@ class App extends Component {
     })
   }
 
+  //  Logs in the user and sets the cookie for 5 days
   userLogin = userLoginInfo => {
     let loginUsername = userLoginInfo.username
     let loginUserpass = userLoginInfo.password
@@ -184,6 +184,8 @@ class App extends Component {
     })
   }
 
+  // Does the same thing as the api call above, checks if the user has any monster saved
+  //and grabs them. This happens when the user saves a monster
   loadMonsterList = userId => {
     
     fetch(`${config.API_ENDPOINT}/api/monsters/userId/${userId}`, {
@@ -343,6 +345,7 @@ class App extends Component {
     }}))
   }
 
+  // Searched for whatever stat was changed and then saved the state with the new info
   updateMonsterStats = (key, value) => {
     this.setState( prevState => ({
       monsterStats: {
@@ -400,6 +403,8 @@ class App extends Component {
 
   }
 
+  // Sets the monster Id in the state to 0 and clears all the stats so when the user hits save
+  //the api saves a new monster
   newMonsterId = () => {
     let currentId = this.state.monsterStats.monster_id;
 
@@ -543,8 +548,11 @@ class App extends Component {
     })
   }
 
+  // Validates the inputs from the user
   inputValidation = object => {
 
+    // This object is used to return user friendly names for the info as opposed to
+    //the names the server uses like. hitpointsmHp vs Hit points
     const keyToName = {
       user_id: 'User Id',
       monster_id: 'Monster Id',
@@ -581,10 +589,12 @@ class App extends Component {
 
   }
 
+  // Loads the monsters from the api call sent to this function via loadingMonster component
   loadSavedMonsters = savedMonsters => {
     this.setState({monster: savedMonsters})
   }
 
+  // Takes the values of the selected monster and changes the state to them
   loadSavedMonsterStats = savedMonsterStats => {
     this.setState(prevState => ({
       monsterStats: {
@@ -721,6 +731,7 @@ class App extends Component {
     this.loadSavedMonsterMoves(savedMonsterStats)
   }
 
+  // Does the same thing as the function above but for moves
   loadSavedMonsterMoves = savedMonsterStats => {
     const selectedMonsterId = savedMonsterStats.id;
     
@@ -738,11 +749,14 @@ class App extends Component {
     })
   }
 
+  // Takes the input from the abilities function in BaseMonsterStats and adds them to the monster moves state
   addMonsterAttack = full_action => {
     this.setState({ monsterMoves: [...this.state.monsterMoves, full_action]});
 
   }
 
+  // Makes an api call to delete the monster selected In LoadingMonsters then makes a call to get monster from the server
+  //to reset the list
   deleteMonster = monsterId => {
     const toBeDeletedId = (monsterId); //Checks the id of the current monster selected
     const monsterList = this.state.monsters; //grabs the monster list
@@ -777,6 +791,8 @@ class App extends Component {
     })
   }
 
+  // Checks the id of the selected monster in LoadingMonsters component then tries to delete it on the server.
+  //If the deletion is successful on the server, it will then remove it localy from the state
   deleteMonsterAttack = monsterAttack_Id => {
     const selectedMoveId = monsterAttack_Id;
     const monsterMoveList = this.state.monsterMoves

@@ -33,6 +33,7 @@ class BaseMonsterStats extends Component {
         //this.props.updateMonsterStats(this.state)
     }
 
+    // Grabs all the info from the monster moves form and appends them to a list before sending them to the API call in App.js
     handleMovesSubmit = e => {
         e.preventDefault()
         const moves_id = uuidv4();
@@ -45,6 +46,7 @@ class BaseMonsterStats extends Component {
         this.props.addMonsterAttack(full_action)
     }
 
+    // Shows or hides the monster stats/move form
     formVisibility(value) {
 
         if (value === 1) {

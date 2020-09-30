@@ -6,6 +6,7 @@ var CryptoJS = require("crypto-js");
 
 class LoginBar extends Component {
 
+    //  Logic for showing and hiding the user creation button and login button
     userCreation_and_LoginBar_Toggle(buttonValue) {
         if (buttonValue === 1) {
             document.getElementById('userCreationFormContainer').style.display = "block";
@@ -14,7 +15,7 @@ class LoginBar extends Component {
 
             document.getElementById('userCreationError').innerHTML = ""; //Sets error message to nothing
 
-            //Sets all user creation input fields to empty
+            //  Sets all user creation input fields to empty
             document.getElementById('userNameInput').value = "";
             document.getElementById('userPasswordInput').value = "";
             document.getElementById('userRepeatPasswordInput').value = "";
@@ -26,12 +27,13 @@ class LoginBar extends Component {
 
             document.getElementById('userCreationErrorLogin').innerHTML = ""; //Sets error message to nothing
 
-            //Sets all user creation input fields to empty
+            //  Sets all user creation input fields to empty
             document.getElementById('userNameInputLogin').value = "";
             document.getElementById('userPasswordInputLogin').value = "";
         }
     }
 
+    // User login request. Grabs all the unputs from the forms and then sends them up to the api call in App.js
     loginRequest() {
         let username = document.getElementById('userNameInputLogin').value;
 
@@ -52,6 +54,7 @@ class LoginBar extends Component {
 
             document.getElementById('userLoginFormContainer').style.display = "none";
 
+            //  Hashed both the username and password before sending it to the api call
             let hashedPassword = CryptoJS.MD5(password).toString();
 
             let userLoginInfo = {username: username, password: hashedPassword};      
@@ -61,14 +64,18 @@ class LoginBar extends Component {
 
     }
 
+    //  User creation request. Grabs all the unputs from the forms and then sends them up to the api call in App.js
     createNewUser() {
+
         let username = document.getElementById('userNameInput').value;
 
         if (username === '') {
             document.getElementById('userCreationError').innerHTML = 'Missing Username!';
             return
         }
-
+        
+        //  Uses createUserPassword function to check all the requirements for passwords such as length and it matching
+        //with the repeated password.
         let password = this.createUserPassword();
 
         if( password === null) {
@@ -76,6 +83,7 @@ class LoginBar extends Component {
             return
 
         } else {
+            // Emptys the form values so they will be empty when leave the user creation form
             document.getElementById('userNameInput').value = "";
             document.getElementById('userPasswordInput').value = "";
             document.getElementById('userRepeatPasswordInput').value = "";
@@ -89,6 +97,7 @@ class LoginBar extends Component {
         }
     }
 
+    //  Returns errors when the password is either too short or does not match the reapeated password
     createUserPassword() {
         let password = document.getElementById('userPasswordInput').value;
 
@@ -106,11 +115,13 @@ class LoginBar extends Component {
 
             let passwordRepeat = document.getElementById('userRepeatPasswordInput').value
 
+            //  Checks if the two passwords are the same
             if (password != passwordRepeat) {
                 document.getElementById('userCreationError').innerHTML = 'Passwords do not match!';
                 password = null;
 
             }  else {
+                //  If the two passwords are the same. It resets the inner html since we have already stored it
                 document.getElementById('userCreationError').innerHTML = '';
             }
         }
@@ -118,6 +129,7 @@ class LoginBar extends Component {
         return password
     }
 
+    //  Shows the user who is logged in if anyone
     loggedInUser = () => {
         const loggedInUsername = this.props.username;
         if (loggedInUsername === '') {
@@ -127,6 +139,8 @@ class LoginBar extends Component {
         }
     }
 
+    // Similar to up top, this is the logic to show/hide the monster Stats form and the monster card form. This is only
+    //used on mobile when we want to show one or the other because of space.
     formVsOutputVisibility(value) {
         if (value === 1) {
             document.getElementById('monsterCardOn').style.display = "block";
@@ -154,7 +168,7 @@ class LoginBar extends Component {
     render() {
         
         return (
-            <div>
+            <div className="login_Bar_Container">
                 <div className="loginForm" id="loginForm">
                     <div id = "loginButtons">
                         <button className="loginButton"><Link to='/'>Homepage</Link></button>

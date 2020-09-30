@@ -43,6 +43,8 @@ class ActionList extends Component {
             )
         }
 
+        //  Itterates through the list of moves. If the move has an action style of 'Action' it adds it to the action list
+        //Then it renders out the actionList
         reactionListRender() {
             const reactionList = [];
             const allMoves = this.props.monsterMoves;
@@ -76,6 +78,8 @@ class ActionList extends Component {
             )
         }
 
+        //  Itterates through the list of moves. If the move has an action style of 'Action' it adds it to the action list
+        //Then it renders out the actionList
         skillListRender() {
             const skillList = [];
             const allMoves = this.props.monsterMoves;

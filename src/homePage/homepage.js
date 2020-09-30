@@ -4,11 +4,12 @@ import './homePage.css'
 
 class Homepage extends Component {
 
-
+    // Brings up a window for more info
     moreInfoButton() {
         document.getElementById('moreInfoPopup').style.display = "block";
     }
 
+    //  Closes the more info button
     closeMoreInfo() {
         document.getElementById('moreInfoPopup').style.display = "none"
     }
