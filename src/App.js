@@ -43,12 +43,12 @@ class App extends Component {
     startingPoint: [],
     monsters: [],
     monsterMoves: []
-  }  
+  };
 
 
-  //  Grabs info from api endpoint
-  //Grab only info relivant for the user. Depending on size (less than 200 kb)
-  //Either pull all of it at the start for less requests, or if larger
+  //Grabs info from api endpoint
+    //Grab only info relivant for the user. Depending on size (less than 200 kb)
+    //Either pull all of it at the start for less requests, or if larger
   componentDidMount() {
     
     let cookiedUser = (cookies.get('user_id'));
@@ -62,13 +62,14 @@ class App extends Component {
         monsterStats: {
           ...prevState.monsterStats,
           user_id: cookiedUser
-      }}))
+      }}));
 
       this.setState(prevState => ({
         monsterStats: {
           ...prevState.monsterStats,
           currentUserName: cookiedUsername
-      }}))
+      }}));
+
     } else {
 
       cookiedUser = 0;
@@ -98,11 +99,11 @@ class App extends Component {
         .catch(error => {
 
         })
-  }
+  };
 
   //  creates a new user in the database and returns the id
   newUserCreation = (username, password) => {
-    let newUserInfo = {username: username, userpass: password}
+    let newUserInfo = {username: username, userpass: password};
     
     fetch(`${config.API_ENDPOINT}/api/users`, {
       method: 'POST',
@@ -128,12 +129,12 @@ class App extends Component {
     .catch(error => {
 
     })
-  }
+  };
 
   //  Logs in the user and sets the cookie for 5 days
   userLogin = userLoginInfo => {
-    let loginUsername = userLoginInfo.username
-    let loginUserpass = userLoginInfo.password
+    let loginUsername = userLoginInfo.username;
+    let loginUserpass = userLoginInfo.password;
 
     fetch(`${config.API_ENDPOINT}/api/users/${loginUsername}/${loginUserpass}`, {
       method: 'GET',
@@ -160,29 +161,29 @@ class App extends Component {
           monsterStats: {
             ...prevState.monsterStats,
             user_id: data[0].id
-        }}))
+        }}));
 
         this.setState(prevState => ({
           monsterStats: {
             ...prevState.monsterStats,
             currentUserName: data[0].username
-        }}))
+        }}));
         
-        const fiveDays = 60*60*24*5
+        const fiveDays = 60*60*24*5;
         
         cookies.set('user_id', data[0].id, {secure: true, maxAge: fiveDays});
         cookies.set('username', data[0].username, {secure: true, maxAge: fiveDays});
         
         
-        let loggedInUserId = data[0].id
-        this.loadMonsterList(loggedInUserId)
+        let loggedInUserId = data[0].id;
+        this.loadMonsterList(loggedInUserId);
       }
     })
 
     .catch(error => {
 
     })
-  }
+  };
 
   // Does the same thing as the api call above, checks if the user has any monster saved
   //and grabs them. This happens when the user saves a monster
@@ -206,7 +207,7 @@ class App extends Component {
     .then(monsters => {
       this.setState({monsters})
     })
-  }
+  };
 
   //  sets the state = to the base monster. Mainly resetting the monster id so when the user saves
   //their monster it will do a post request instead of a patch
@@ -216,134 +217,134 @@ class App extends Component {
       monsterStats: {
         ...prevState.monsterStats,
         monster_id: 0
-    }}))
+    }}));
 
     this.setState( prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mName: ''
-    }}))
+    }}));
 
     this.setState( prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mType: ''
-    }}))
+    }}));
 
     this.setState( prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mCr: '0'
-    }}))
+    }}));
 
     this.setState( prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mAtk: 0
-    }}))
+    }}));
 
     this.setState( prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mSaveDc: 0
-    }}))
+    }}));
 
     this.setState( prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mProf: 0
-    }}))
+    }}));
 
     this.setState( prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mArmor: 10
-    }}))
+    }}));
 
     this.setState( prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mHp: 0
-    }}))
+    }}));
 
     this.setState( prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mSpeed: 0
-    }}))
+    }}));
 
     this.setState( prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mStr: 10
-    }}))
+    }}));
 
     this.setState( prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mDex: 10
-    }}))
+    }}));
 
     this.setState( prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mCon: 10
-    }}))
+    }}));
 
     this.setState( prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mInt: 10
-    }}))
+    }}));
 
     this.setState( prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mWis: 10
-    }}))
+    }}));
 
     this.setState( prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mCha: 10
-    }}))
+    }}));
 
     this.setState( prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mVul: ''
-    }}))
+    }}));
 
     this.setState( prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mRes: ''
-    }}))
+    }}));
 
     this.setState( prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mImmune: ''
-    }}))
+    }}));
 
     this.setState( prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mSenses: ''
-    }}))
+    }}));
     
     this.setState( prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mLanguage: ''
-    }}))
+    }}));
 
     this.setState( prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mEnotes: ''
-    }}))
-  }
+    }}));
+  };
 
   // Searched for whatever stat was changed and then saved the state with the new info
   updateMonsterStats = (key, value) => {
@@ -351,7 +352,7 @@ class App extends Component {
       monsterStats: {
         ...prevState.monsterStats,
         [key]: value
-    }}))
+    }}));
   }
 
   //  used input from the combat rating suggestions
@@ -369,42 +370,42 @@ class App extends Component {
       monsterStats: {
         ...prevState.monsterStats,
         mProf: proficiencyBonus
-    }}))
+    }}));
 
     this.setState( prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mAtk: attackBonus
-    }}))
+    }}));
 
     this.setState( prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mSaveDc: saveDc
-    }}))
+    }}));
 
     this.setState( prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mCr: combatRating
-    }}))
+    }}));
 
     this.setState( prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mArmor: averageAc
-    }}))
+    }}));
 
     this.setState( prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mHp: averageHitpoints
-    }}))
+    }}));
 
-  }
+  };
 
-  // Sets the monster Id in the state to 0 and clears all the stats so when the user hits save
-  //the api saves a new monster
+  //Sets the monster Id in the state to 0 and clears all the stats so when the user hits save
+    //the api saves a new monster
   newMonsterId = () => {
     let currentId = this.state.monsterStats.monster_id;
 
@@ -415,16 +416,17 @@ class App extends Component {
         monsterStats: {
           ...prevState.monsterStats,
           monster_id: currentId
-      }}))
+      }}));
       
     }
 
     return currentId;
 
-  }
-  //  Uses the state to update the monster info
-  //if an error returns saying the monster already exists it creates the monster
-  //running saveNewMonster function
+  };
+
+  //Uses the state to update the monster info
+    //if an error returns saying the monster already exists it creates the monster
+    //running saveNewMonster function
   saveMonster = monsterInfo => {
     let user_id = monsterInfo.user_id;
     let monster_id = this.newMonsterId();
@@ -473,7 +475,7 @@ class App extends Component {
       inteligence: inteligence,
       wisdom: wisdom,
       charisma: charisma,
-    }
+    };
 
     const nonRequiredInfo = {
       damagevulnerability: damagevulnerability,
@@ -482,14 +484,14 @@ class App extends Component {
       senses: senses,
       creature_language: creature_language,
       notes: notes
-    }
+    };
 
     this.inputValidation(requiredInfo);
 
     const newMonster = {
       ...requiredInfo,
       ...nonRequiredInfo
-    }
+    };
     
     fetch(`${config.API_ENDPOINT}/api/monsters/monsterId/${monster_id}`, {
       method: 'PATCH',
@@ -519,10 +521,10 @@ class App extends Component {
     .catch(error => {
 
     })
-  }
+  };
 
-  //  Grabs monster id then uses theid as part of the move post request
-  //along with the other info from the form
+  //Grabs monster id then uses theid as part of the move post request
+    //along with the other info from the form
   saveMoves = monsterMoves => {
     monsterMoves.forEach((info) => {
       info['monster_id'] = this.state.monsterStats.monster_id;
@@ -546,7 +548,7 @@ class App extends Component {
 
       })
     })
-  }
+  };
 
   // Validates the inputs from the user
   inputValidation = object => {
@@ -571,15 +573,15 @@ class App extends Component {
       inteligence: 'Inteligence Score',
       wisdom: 'Wisdom Score',
       charisma: 'Charisma Score',
-    }
+    };
 
-    const invalidInputs = []
+    const invalidInputs = [];
 
     Object.entries(object).forEach(([key, value]) => {
       if (value === 0 || value === '') {
         invalidInputs.push(key)
       }
-    })      
+    });    
 
     if (invalidInputs.length != 0) {
       let topInvalidKey = invalidInputs[0];
@@ -587,12 +589,12 @@ class App extends Component {
       window.alert(`You are missing the "${missingInput}" field. Please fill it out before, and other you may be missing before you try again.`)
     }
 
-  }
+  };
 
   // Loads the monsters from the api call sent to this function via loadingMonster component
   loadSavedMonsters = savedMonsters => {
     this.setState({monster: savedMonsters})
-  }
+  };
 
   // Takes the values of the selected monster and changes the state to them
   loadSavedMonsterStats = savedMonsterStats => {
@@ -600,136 +602,136 @@ class App extends Component {
       monsterStats: {
         ...prevState.monsterStats,
         monster_id: (savedMonsterStats.id)
-    }}))
+    }}));
 
     this.setState(prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mName: savedMonsterStats.monster_name
-    }}))
+    }}));
 
     this.setState(prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mType: savedMonsterStats.monster_type
-    }}))
+    }}));
 
     this.setState(prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mCr: savedMonsterStats.challenge_rating
-    }}))
+    }}));
 
     this.setState(prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mAtk: parseInt(savedMonsterStats.attackbonus)
-    }}))
+    }}));
 
     this.setState(prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mSaveDc: parseInt(savedMonsterStats.savedc)
-    }}))
+    }}));
 
     this.setState(prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mProf: parseInt(savedMonsterStats.proficiencybonus)
-    }}))
+    }}));
 
     this.setState(prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mArmor: parseInt(savedMonsterStats.armorclass)
-    }}))
+    }}));
 
     this.setState(prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mHp: parseInt(savedMonsterStats.hitpoints)
-    }}))
+    }}));
 
     this.setState(prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mSpeed: savedMonsterStats.speed
-    }}))
+    }}));
 
     this.setState(prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mStr: parseInt(savedMonsterStats.strength)
-    }}))
+    }}));
 
     this.setState(prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mDex: parseInt(savedMonsterStats.dexterity)
-    }}))
+    }}));
 
     this.setState(prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mCon: parseInt(savedMonsterStats.constitution)
-    }}))
+    }}));
 
     this.setState(prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mInt: parseInt(savedMonsterStats.inteligence)
-    }}))
+    }}));
 
     this.setState(prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mWis: parseInt(savedMonsterStats.wisdom)
-    }}))
+    }}));
 
     this.setState(prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mCha: parseInt(savedMonsterStats.charisma)
-    }}))
+    }}));
 
     this.setState(prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mVul: savedMonsterStats.vulnerability
-    }}))
+    }}));
 
     this.setState(prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mRes: savedMonsterStats.resistance
-    }}))
+    }}));
 
     this.setState(prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mImmune: savedMonsterStats.immunities
-    }}))
+    }}));
 
     this.setState(prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mSenses: savedMonsterStats.senses
-    }}))
+    }}));
 
     this.setState(prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mLanguage: savedMonsterStats.language
-    }}))
+    }}));
 
     this.setState(prevState => ({
       monsterStats: {
         ...prevState.monsterStats,
         mEnotes: savedMonsterStats.notes
-    }}))
+    }}));
     
     this.loadSavedMonsterMoves(savedMonsterStats)
-  }
+  };
 
   // Does the same thing as the function above but for moves
   loadSavedMonsterMoves = savedMonsterStats => {
@@ -747,13 +749,12 @@ class App extends Component {
     .then(data => {
       this.setState({monsterMoves: data})
     })
-  }
+  };
 
   // Takes the input from the abilities function in BaseMonsterStats and adds them to the monster moves state
   addMonsterAttack = full_action => {
     this.setState({ monsterMoves: [...this.state.monsterMoves, full_action]});
-
-  }
+  };
 
   // Makes an api call to delete the monster selected In LoadingMonsters then makes a call to get monster from the server
   //to reset the list
@@ -789,7 +790,7 @@ class App extends Component {
       }
 
     })
-  }
+  };
 
   // Checks the id of the selected monster in LoadingMonsters component then tries to delete it on the server.
   //If the deletion is successful on the server, it will then remove it localy from the state
@@ -820,7 +821,7 @@ class App extends Component {
         })
       }
     })
-  }
+  };
 
   render() {
 
@@ -865,7 +866,7 @@ class App extends Component {
       //</DndContext.Provider>
       
     )
-  }
+  };
 }
 
 

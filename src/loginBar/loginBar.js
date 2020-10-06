@@ -31,7 +31,7 @@ class LoginBar extends Component {
             document.getElementById('userNameInputLogin').value = "";
             document.getElementById('userPasswordInputLogin').value = "";
         }
-    }
+    };
 
     // User login request. Grabs all the unputs from the forms and then sends them up to the api call in App.js
     loginRequest() {
@@ -62,7 +62,7 @@ class LoginBar extends Component {
             this.props.userLogin(userLoginInfo)
         }
 
-    }
+    };
 
     //  User creation request. Grabs all the unputs from the forms and then sends them up to the api call in App.js
     createNewUser() {
@@ -95,7 +95,7 @@ class LoginBar extends Component {
 
             this.props.newUserCreation(username, hashedPassword);
         }
-    }
+    };
 
     //  Returns errors when the password is either too short or does not match the reapeated password
     createUserPassword() {
@@ -113,7 +113,7 @@ class LoginBar extends Component {
 
         } else {
 
-            let passwordRepeat = document.getElementById('userRepeatPasswordInput').value
+            let passwordRepeat = document.getElementById('userRepeatPasswordInput').value;
 
             //  Checks if the two passwords are the same
             if (password != passwordRepeat) {
@@ -127,7 +127,7 @@ class LoginBar extends Component {
         }
 
         return password
-    }
+    };
 
     //  Shows the user who is logged in if anyone
     loggedInUser = () => {
@@ -137,7 +137,7 @@ class LoginBar extends Component {
         } else {
         return <p>Current User: {loggedInUsername}</p>
         }
-    }
+    };
 
     // Similar to up top, this is the logic to show/hide the monster Stats form and the monster card form. This is only
     //used on mobile when we want to show one or the other because of space.
@@ -162,7 +162,7 @@ class LoginBar extends Component {
             document.getElementById('monsterCard').style.display = "block";
         }
 
-    }
+    };
       
 
     render() {
@@ -252,7 +252,7 @@ class LoginBar extends Component {
 
             </div>
         )
-    }
+    };
 }
 
 export default LoginBar;

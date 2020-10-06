@@ -6,7 +6,7 @@ class ActionList extends Component {
             actions: [],
             reactions: [],
             skills: []
-        }
+        };
 
         //  Itterates through the list of moves. If the move has an action style of 'Action' it adds it to the action list
         //Then it renders out the actionList
@@ -18,7 +18,7 @@ class ActionList extends Component {
                 if (allMoves[i].style === "Action") {
                     actionList.push(allMoves[i])
                 }
-            }
+            };
             
 
             return (
@@ -41,7 +41,7 @@ class ActionList extends Component {
                     
                 )
             )
-        }
+        };
 
         //  Itterates through the list of moves. If the move has an action style of 'Action' it adds it to the action list
         //Then it renders out the actionList
@@ -78,8 +78,8 @@ class ActionList extends Component {
             )
         }
 
-        //  Itterates through the list of moves. If the move has an action style of 'Action' it adds it to the action list
-        //Then it renders out the actionList
+        //Itterates through the list of moves. If the move has an action style of 'Action' it adds it to the action list
+            //Then it renders out the actionList
         skillListRender() {
             const skillList = [];
             const allMoves = this.props.monsterMoves;
@@ -88,7 +88,7 @@ class ActionList extends Component {
                 if (allMoves[i].style === 'Skill') {
                     skillList.push(allMoves[i])
                 }
-            }
+            };
             
 
             return (
@@ -111,11 +111,10 @@ class ActionList extends Component {
                     
                 )
             )
-        }
+        };
 
         render () {
-            
-
+        
             return (
                 <div className="monsterMovesContainer">
 

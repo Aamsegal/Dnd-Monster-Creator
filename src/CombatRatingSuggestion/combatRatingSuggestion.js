@@ -18,31 +18,30 @@ import {v4 as uuidv4 } from 'uuid';
             saveDcSuggestion: "",
             saveDc: 0,
             baseStats: [],
-    }
+    };
 
     // Used to generate a UUID
     generateUuid(){
         const uniqueId = uuidv4();
         return uniqueId;
-    }
+    };
 
     //  on submit, will grab the information from the selected combat rating and
     //render the stats out on the screen as well as update the monster card
     handleSubmit = async (e) => {
-        e.preventDefault()        
+        e.preventDefault();    
         //  compairs the combat rating gathers from the options to see if any
         //match in base stats and saves that object to combatRatingStats
         //waits for savingUpdatedMonsterInfo to finish then it continues
         await this.savingUpdatedMonsterInfo();
 
         this.monsterBaseStatsRender();
-        this.props.updateMonsterStartingPoint(this.state)
-    }
+        this.props.updateMonsterStartingPoint(this.state);
+    };
 
     //  Saved the monster info from the form to the state
     savingUpdatedMonsterInfo() {
         const combatRating = document.getElementById("combatRatingSelection").value;
-        //const showKey = document.getElementById("combatRatingSelection").key;
 
         let combatRatingStats = {};
         let baseStats = this.props.startingValues;
@@ -63,7 +62,7 @@ import {v4 as uuidv4 } from 'uuid';
                 this.setState({saveDc: combatRatingStats.savedc});
             }
         }
-    }
+    };
 
     //  If no combat rating is selected no stats will be rendered. If a CR is selected, it will render the stats
     monsterBaseStatsRender() {
@@ -87,7 +86,7 @@ import {v4 as uuidv4 } from 'uuid';
                 
             )
         }
-    }
+    };
     
 
 
@@ -115,7 +114,6 @@ import {v4 as uuidv4 } from 'uuid';
             </div>
         )
             
-
     }
 }
 

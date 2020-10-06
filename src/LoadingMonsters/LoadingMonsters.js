@@ -4,26 +4,24 @@ import './LoadingMonsters.css';
 class LoadingMonsters extends Component {
     state = {
         monsters: []
-    }
-
-
+    };
 
     selectMonster = e => {
-        e.preventDefault()
-        const monsterList = this.props.monsters
+        e.preventDefault();
+        const monsterList = this.props.monsters;
         const selectedMonsterid = document.getElementById('monsterListImport').value;
-        let selectedMonster = []
+        let selectedMonster = [];
 
         for (let i=0; i < monsterList.length; i++) {
             if(monsterList[i].id === selectedMonsterid) {
                 selectedMonster = monsterList[i]
             }
         }
-        this.props.loadSavedMonsterStats(selectedMonster)
-    }
+        this.props.loadSavedMonsterStats(selectedMonster);
+    };
 
     deleteMonster = e => {
-        e.preventDefault()
+        e.preventDefault();
         const currentMonsterId = document.getElementById('monsterListImport').value;
         let currentMonsterName = '';
 
@@ -36,12 +34,12 @@ class LoadingMonsters extends Component {
         if (window.confirm(`Are you sure you want to delete ${currentMonsterName}`) === true) {
             this.props.deleteMonster(currentMonsterId)
         } 
-    }
+    };
 
     createNewMonster = e => {
         e.preventDefault()
         this.props.createNewMonster()
-    }
+    };
 
     render() {
         return(
@@ -61,7 +59,7 @@ class LoadingMonsters extends Component {
             </div>
             
         )
-    }
+    };
 }
 
 export default LoadingMonsters;

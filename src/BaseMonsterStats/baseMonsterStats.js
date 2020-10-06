@@ -26,16 +26,16 @@ class BaseMonsterStats extends Component {
         mLanguage: '',
         mEnotes: '',
         monsterMove: {}
-    }
+    };
 
     handleSubmit = e => {
         e.preventDefault()
         //this.props.updateMonsterStats(this.state)
-    }
+    };
 
-    // Grabs all the info from the monster moves form and appends them to a list before sending them to the API call in App.js
+    //Grabs all the info from the monster moves form and appends them to a list before sending them to the API call in App.js
     handleMovesSubmit = e => {
-        e.preventDefault()
+        e.preventDefault();
         const moves_id = uuidv4();
         const action_name = document.getElementById("action_name").value;
         const action_type = document.getElementById("action_type").value;
@@ -56,7 +56,7 @@ class BaseMonsterStats extends Component {
             document.getElementById('baseStatsForm').style.display = "none";
             document.getElementById('movesFormContainer').style.display = "block";
         }
-    }
+    };
 
     render() {
         return (
@@ -215,8 +215,6 @@ class BaseMonsterStats extends Component {
                             value={this.props.monsterStats.mEnotes} 
                             onChange= {(e) => this.props.updateMonsterStats(e.currentTarget.id, e.currentTarget.value)}></input>
                         </div>
-                        
-                        {/*<button>Submit</button>*/}
 
                 </div>
                 

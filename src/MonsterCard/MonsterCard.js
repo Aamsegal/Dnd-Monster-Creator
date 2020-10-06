@@ -4,18 +4,18 @@ import './MonsterCard.css'
 
 class MonsterCard extends Component {
         saveMonsterCard = e => {
-            e.preventDefault()
-            this.props.saveMonsterFunction(this.props.monsterInfo)
-        }
+            e.preventDefault();
+            this.props.saveMonsterFunction(this.props.monsterInfo);
+        };
 
 
         render() {
-        const strMod = Math.floor(parseInt((this.props.monsterInfo.mStr)-10)/2)
-        const dexMod = Math.floor(parseInt((this.props.monsterInfo.mDex)-10)/2)
-        const conMod = Math.floor(parseInt((this.props.monsterInfo.mCon)-10)/2)
-        const intMod = Math.floor(parseInt((this.props.monsterInfo.mInt)-10)/2)
-        const wisMod = Math.floor(parseInt((this.props.monsterInfo.mWis)-10)/2)
-        const chaMod = Math.floor(parseInt((this.props.monsterInfo.mCha)-10)/2)
+            const strMod = Math.floor(parseInt((this.props.monsterInfo.mStr)-10)/2);
+            const dexMod = Math.floor(parseInt((this.props.monsterInfo.mDex)-10)/2);
+            const conMod = Math.floor(parseInt((this.props.monsterInfo.mCon)-10)/2);
+            const intMod = Math.floor(parseInt((this.props.monsterInfo.mInt)-10)/2);
+            const wisMod = Math.floor(parseInt((this.props.monsterInfo.mWis)-10)/2);
+            const chaMod = Math.floor(parseInt((this.props.monsterInfo.mCha)-10)/2);
 
         return (
             <div className="monsterCard" id="monsterCard">
@@ -160,7 +160,7 @@ class MonsterCard extends Component {
                 
             </div>
         )
-    }
+    };
 }
 
 export default MonsterCard;
