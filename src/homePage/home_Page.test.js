@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import ReactDOM from 'react-dom';
-import App from './App';
+import HomePage from './homepage';
 
-describe('Base Monster Stats component tests', () => {
+describe('Home Page component tests', () => {
    it('renders without crashing', () => {
-      <App />;
+      <HomePage />;
     });
 });

@@ -51,10 +51,10 @@ class BaseMonsterStats extends Component {
 
         if (value === 1) {
             document.getElementById('baseStatsForm').style.display = "block";
-            document.getElementById('movesForm').style.display = "none";
+            document.getElementById('movesFormContainer').style.display = "none";
         } else if (value === 2) {
             document.getElementById('baseStatsForm').style.display = "none";
-            document.getElementById('movesForm').style.display = "block";
+            document.getElementById('movesFormContainer').style.display = "block";
         }
     }
 
@@ -220,24 +220,35 @@ class BaseMonsterStats extends Component {
 
                 </div>
                 
-                <div  id="movesForm" style={{display: 'none'}}>
-                    <form onSubmit={this.handleMovesSubmit}>
-                        <label htmlFor="action_name">Name</label>
-                        <input type="text" id="action_name" name="action_name"></input>
+                <div  id="movesFormContainer" style={{display: 'none'}}>
+                    <form className="movesForm" onSubmit={this.handleMovesSubmit}>
 
-                        <label htmlFor="action_type">Action Type</label>
-                        <select id='action_type' name='action_type'>
-                            <option value="Action" key="Action">Action</option>
-                            <option value="Reaction" key="Reaction">Reaction</option>
-                            <option value="Skill" key="Skill">Skill</option>
-                        </select>
+                        <div className="movesInputContainer">
+                            <label htmlFor="action_name">Name</label>
+                            <input type="text" id="action_name" name="action_name"></input>
+                        </div>
+                        
+                        <div className="movesInputContainer">
+                            <label htmlFor="action_type">Action Type</label>
+                            <select id='action_type' name='action_type'>
+                                <option value="Action" key="Action">Action</option>
+                                <option value="Reaction" key="Reaction">Reaction</option>
+                                <option value="Skill" key="Skill">Skill</option>
+                            </select>
+                        </div>
+                        
+                        <div className="movesInputContainer">
+                            <label htmlFor="action_details">Details</label>
+                            <input type="text" id="action_details" name="action_details" placeholder="The creature swings with its sword"></input>
+                        </div>
+                        
 
-                        <label htmlFor="action_details">Details</label>
-                        <input type="text" id="action_details" name="action_details" placeholder="The creature swings with its sword"></input>
-
-                        <label htmlFor="damage_dice">Damage Dice</label>
-                        <input type="text" id="damage_dice" name="damage_dice" placeholder="1d4, 1d8, 2d6"></input>
-                        <button>Submit</button>
+                        <div className="movesInputContainer">
+                            <label htmlFor="damage_dice">Damage Dice</label>
+                            <input type="text" id="damage_dice" name="damage_dice" placeholder="1d4, 1d8, 2d6"></input>
+                        </div>
+                        
+                        <button className="monsterMovesSubmit">Submit</button>
                     </form>
                 </div>
             </div>

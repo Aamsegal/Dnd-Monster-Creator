@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import ReactDOM from 'react-dom';
-import App from './App';
+import LoginBar from './loginBar';
 
-describe('Base Monster Stats component tests', () => {
+describe('Login Bar component tests', () => {
    it('renders without crashing', () => {
-      <App />;
+      <LoginBar />;
     });
 });

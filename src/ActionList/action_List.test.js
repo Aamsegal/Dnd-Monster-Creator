@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import ReactDOM from 'react-dom';
-import App from './App';
+import ActionList from './actionList';
 
-describe('Base Monster Stats component tests', () => {
+describe('First React component test with Enzyme', () => {
    it('renders without crashing', () => {
-      <App />;
+      <ActionList />;
     });
 });

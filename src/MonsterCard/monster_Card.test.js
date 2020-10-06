@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import ReactDOM from 'react-dom';
-import App from './App';
+import MonsterCard from './MonsterCard';
 
-describe('Base Monster Stats component tests', () => {
+describe('Monster Card component tests', () => {
    it('renders without crashing', () => {
-      <App />;
+      <MonsterCard />;
     });
 });

@@ -9,12 +9,21 @@
     background-color: #aaa;
 }
 
-.baseStatsButton {
+.baseStatsButton, .monsterMovesSubmit {
     border-radius: 15px;
 
     background-color: #383838; /* Green */
     border: none;
     color: white;
+}
+
+#movesFormContainer label {
+    color: black;
+    display: block;
+}
+
+.movesInputContainer {
+    text-align: left;
 }
 
 @media screen and (max-width: 800px) {
@@ -65,10 +74,41 @@
     #baseStatsForm {
         margin-bottom: 10px;
     }
+
+    /*Moves form div CSS*/
+    #movesFormContainer {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 15px;
+    }
+
+    .movesForm {
+        padding-top: 0;
+    }
+
+    .movesInputContainer {
+        width: 50%;
+        display: inline-block;
+        margin-bottom: 5px;
+    }
+
+    .movesForm button {
+        margin-top: 20px;
+        margin-bottom: 20px;
+
+        font-size: 16px;
+        width: 90px;
+        height: 30px;
+        margin-left: 5px;
+        margin-right: 5px;
+        text-decoration: bold;
+    }
     
 }
 
 @media screen and (min-width: 801px) and (max-width: 1150px) {
+    /*Base Stats div CSS*/
     .baseMonsterInfo {
         display: inline-block;
         width: 45%;
@@ -111,9 +151,39 @@
         color: black;
         font-size: 18px;
     }
+
+    /*Moves form div CSS*/
+    #movesFormContainer {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 15px;
+    }
+
+    .movesForm {
+        padding-top: 0;
+    }
+
+    .movesInputContainer {
+        width: 50%;
+        display: inline-block;
+    }
+
+    .movesForm button {
+        margin-top: 20px;
+        margin-bottom: 20px;
+
+        font-size: 16px;
+        width: 90px;
+        height: 30px;
+        margin-left: 5px;
+        margin-right: 5px;
+        text-decoration: bold;
+    }
 }
 
 @media screen and (min-width: 1151px) {
+    /*Base Stats div CSS*/
     .baseMonsterInfo {
         display: inline-block;
         width: 40%;
@@ -161,6 +231,36 @@
     .baseStatsButton {
         font-size: 16px;
         width: 180px;
+        height: 30px;
+        margin-left: 5px;
+        margin-right: 5px;
+        text-decoration: bold;
+    }
+
+    /*Moves form div CSS*/
+
+    #movesFormContainer {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 15px;
+    }
+
+    .movesForm {
+        padding-top: 0;
+    }
+
+    .movesInputContainer {
+        width: 50%;
+        display: inline-block;
+    }
+
+    .movesForm button {
+        margin-top: 20px;
+        margin-bottom: 20px;
+
+        font-size: 16px;
+        width: 90px;
         height: 30px;
         margin-left: 5px;
         margin-right: 5px;
